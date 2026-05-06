@@ -1,0 +1,10 @@
+.venv/
+__pycache__/
+*.log
+*.txt
+!requirements.txt
+!error.txt
+.streamlit/secrets.toml
+.streamlit/*.json
+*.json
+.env

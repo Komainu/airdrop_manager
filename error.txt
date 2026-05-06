@@ -1,0 +1,25 @@
+Traceback (most recent call last):
+  File "C:\Users\xakah\OneDrive\ドキュメント\airdrop_manager\.venv\Lib\site-packages\gspread\client.py", line 168, in open_by_key
+    spreadsheet = Spreadsheet(self.http_client, {"id": key})
+  File "C:\Users\xakah\OneDrive\ドキュメント\airdrop_manager\.venv\Lib\site-packages\gspread\spreadsheet.py", line 29, in __init__
+    metadata = self.fetch_sheet_metadata()
+  File "C:\Users\xakah\OneDrive\ドキュメント\airdrop_manager\.venv\Lib\site-packages\gspread\spreadsheet.py", line 230, in fetch_sheet_metadata
+    return self.client.fetch_sheet_metadata(self.id, params=params)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\xakah\OneDrive\ドキュメント\airdrop_manager\.venv\Lib\site-packages\gspread\http_client.py", line 305, in fetch_sheet_metadata
+    r = self.request("get", url, params=params)
+  File "C:\Users\xakah\OneDrive\ドキュメント\airdrop_manager\.venv\Lib\site-packages\gspread\http_client.py", line 128, in request
+    raise APIError(response)
+gspread.exceptions.APIError: APIError: [403]: Google Sheets API has not been used in project 950342808583 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/sheets.googleapis.com/overview?project=950342808583 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\xakah\OneDrive\ドキュメント\airdrop_manager\test_gspread.py", line 20, in <module>
+    sheet = gc.open_by_url(SHEET_URL)
+  File "C:\Users\xakah\OneDrive\ドキュメント\airdrop_manager\.venv\Lib\site-packages\gspread\client.py", line 189, in open_by_url
+    return self.open_by_key(extract_id_from_url(url))
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\xakah\OneDrive\ドキュメント\airdrop_manager\.venv\Lib\site-packages\gspread\client.py", line 173, in open_by_key
+    raise PermissionError from ex
+PermissionError

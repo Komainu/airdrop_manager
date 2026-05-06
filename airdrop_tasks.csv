@@ -1,0 +1,177 @@
+プロジェクト名,期限,タスク内容,チェーン,重要度,ステータス,ソースURL,chains,ピン留め,sort_date,登録日時,is_completed,資金調達額,VC
+Oro,未定,Solana dApp Storeから「Oro」アプリをインストールし、ウォレットを接続後、Seekerデバイスで接続する。ウォレットにUSDCを準備し、Oroトークンを購入する（現在、アプリでの購入時にエラーが発生する可能性あり）。Seekerデバイス上で売買やステーキングを行うことで、Oro S1期間中の報酬プールから追加特典（獲得倍率ブースト、Tierポイント）を獲得できる。,Solana,A,未完了,,,False,2099-12-31 00:00:00.000000000,2026-03-01T22:52:06.831784+00:00,False,不明,不明
+Blackhaven $HVN ICO,2026/02/18 04:00,"・Sonarランチパッドでの事前登録（KYC完了必須）
+・MegaETHのEchoユーザーは33%ブースト、Ethosユーザーは15-20%ブースト適応
+・@blackhavenのTwitterフォロー",MegaETH L1,S,未完了,https://coinlaunch.space/events-rounds/blackhaven-ico-round/,,False,2262-04-11 23:47:16.854775807,2026-03-01T22:52:06.833297+00:00,False,不明,不明
+Variational Omni ポイントプログラム,未定,"・Variational Omniでの永続取引
+・高流動性アルトコイン（$HYPE, $SOL, $ETH, $ZEC）での取引
+・オープンインターエスト（OI）の高い商品を優先
+・リファラルプログラムの活用",未定,A,完了,https://x.com/linenmito/status/2022737371155063031,,False,2099-12-31 00:00:00.000000000,2026-03-01T22:52:06.835008+00:00,False,不明,不明
+Micro.Fun エージェント経済テストネット,2026/02/23 23:59 UTC,"・DiscordでMicro Passを請求（限定5,000名）
+・テストネット開始前の早期アクセス権獲得
+・Baseネットワーク上での活動",Base,B,完了,https://x.com/microdotfun/status/2020839931183300614,,False,2262-04-11 23:47:16.854775807,2026-03-01T22:52:06.836971+00:00,False,不明,不明
+Konnex World ロボティクステストネット,未定,"・RLHF（Reinforcement Learning from Human Feedback）提出
+・Decentralizedロボティクスデータ収集への参加
+・毎日のソーシャルチェックインとコンテンツ作成",Testnet,B,未完了,https://x.com/konnex_world/status/2021977601904959608,,False,2099-12-31 00:00:00.000000000,2026-03-01T22:52:06.838467+00:00,False,不明,不明
+Polymarket ($POLY),未定,"['プラットフォームでの予測市場取引（政治、スポーツ、経済イベントなど）', 'USDC入金が必要', 'Twitterアカウントの連携推奨', '5分足暗号市場などで流動性提供や取引']",Polygon,A,完了,https://x.com/Polymarket,,False,2099-12-31 00:00:00.000000000,2026-03-01T22:52:06.839895+00:00,False,不明,不明
+Vibe Trading ($VIBE),未定,"['ウェイトリストへの登録', '将来的なパーペチュアル取引所の利用やポイント獲得（公式サイトに""Vibe Points = $VIBE tokens at TGE""と記載）']",未定,B,未完了,https://x.com/vibe_trading,,False,2099-12-31 00:00:00.000000000,2026-03-01T22:52:06.841709+00:00,False,不明,不明
+Fiamma,2026/02/27 23:59,"・['Galxeクエスト「Ride - Early Access Whitelist」へ参加（OATまたはポイント獲得）', 'メインネットでの活動（資金$15程度が必要）']
+・Galxeクエストの完了、Rideアプリでのトレードによる「OG Role」獲得、早期アクセスウェイティングリストへの登録",不明（ソーシャルトレーディング）,B,完了,https://app.galxe.com/quest/HSNdxCoe9kM8RrcreQthJV/GC5GutYbLz,,False,2262-04-11 23:47:16.854775807,2026-03-01T22:52:06.843820+00:00,False,不明,不明
+Spicenet (Elitra Devnet),2026/02/15 23:59,['Devnetは2月15日に終了済み。現在は参加不可。'],未定,C,完了,https://x.com/spicenet_io,,False,2262-04-11 23:47:16.854775807,2026-03-01T22:52:06.845046+00:00,False,不明,不明
+Edgen,未定,Aura ポイントファーミング: 毎日のチェックイン、社会的クエスト、招待、コンテンツ作成,Unknown,S,未完了,https://x.com/EdgenTech/status/2001957914697953674?s=20,,False,2099-12-31 00:00:00.000000000,2026-03-01T22:52:06.846202+00:00,False,不明,不明
+Fast Protocol,未定,Fast RPCを設定、Genesis SBTをミント、スワップを実行してFast Miles/Pointsを獲得,Ethereum,S,未完了,https://x.com/Fast_Protocol/status/2003470708379386317?s=20,,False,2099-12-31 00:00:00.000000000,2026-03-01T22:52:06.847310+00:00,False,不明,不明
+Folks Mobile,未定,待機リストに参加、2026年の発売後にアプリ機能を利用,Multi-chain (TBC),S,未完了,https://x.com/FolksMobile/status/1998424457459953697?s=20,,False,2099-12-31 00:00:00.000000000,2026-03-01T22:52:06.848591+00:00,False,不明,不明
+Variational,2026/06/30 23:59,"・テストネットに参加、取引タスクを完了してエアドロップ資格を得る
+・プラットフォームでの継続的な取引活動による週次ポイント（XP）の獲得。ランキング上位を維持し、Q2のトークン配布に備える。",Multi-chain (TBC),S,完了,https://x.com/variational_io,,False,2262-04-11 23:47:16.854775807,2026-03-01T22:52:06.850266+00:00,False,不明,不明
+Lora Finance,未定,lora.financeで待機リストに参加,MegaETH,S,未完了,https://x.com/LoraFinance/status/2008566896636162068?s=20,,False,2099-12-31 00:00:00.000000000,2026-03-01T22:52:06.851500+00:00,False,不明,不明
+Fluent,未定,ネットワークをウォレットに追加、テストETHを取得、クイズを完了してNFTをミント、Discordに参加して役割を獲得、Printをミントして評判を構築,Ethereum L2,S,完了,https://x.com/fluentxyz/status/2011095452712649094?s=20,,False,2099-12-31 00:00:00.000000000,2026-03-01T22:52:06.852667+00:00,False,不明,不明
+Dango,未定,メインネットアルファでのスポット取引、GalxeクエストでOATを取得、テストネット参加で資格,Dango L1,S,未完了,https://x.com/BankeraDao/status/2010320347338567683?s=20,,False,2099-12-31 00:00:00.000000000,2026-03-01T22:52:06.853852+00:00,False,不明,不明
+Donut AI,未定,ベータテスター申請フォームを記入、Discord/Telegramに参加して更新とコミュニティエンゲージメント,Solana,S,未完了,https://x.com/DonutAI/status/2013875387353489551?s=20,,False,2099-12-31 00:00:00.000000000,2026-03-01T22:52:06.855061+00:00,False,不明,不明
+Veera,未定,hub.veerarewards.comで報酬ハブに参加、社会的/エンゲージメントクエストを完了、XPポイントを獲得（$VEERAに変換）、TGE前にEVMウォレットをバインド,Multi-chain,S,未完了,https://x.com/On_Veera/status/2011081489296081013?s=20,,False,2099-12-31 00:00:00.000000000,2026-03-01T22:52:06.858032+00:00,False,不明,不明
+Unhedged,2026/02/29 23:59,メインネットで取引（2026年2月頃発売）、時間加重報酬のための早期ポジションを取る、リーダーボード競争に参加,未定,S,完了,https://x.com/UnhedgedHQ/status/2014412879194419260?s=20,Canton,False,2262-04-11 23:47:16.854775807,2026-03-01T22:52:06.859442+00:00,False,不明,不明
+Genius,未定,プラットフォームで取引してGenius Points (GP)を獲得、友達を紹介してUSDC/GP報酬、バッジを集めて乗数、取引競争に参加,未定,S,完了,https://x.com/yousukeakaban/status/2011213220804247658?s=20,Multi-chain,False,2099-12-31 00:00:00.000000000,2026-03-01T22:52:06.860719+00:00,False,不明,不明
+Fhenix,未定,https://test.redact.money/にアクセス、ウォレットを接続、Sepolia ETH/USDCをフォーセットから取得、トークンを暗号化/復号（ETHをeETHなど）、https://shieldedmode.fhenix.io/で機密トークンをデプロイ,未定,S,未完了,https://x.com/asedd72/status/2014267534921347221?s=20,Ethereum L2,False,2099-12-31 00:00:00.000000000,2026-03-01T22:52:06.862912+00:00,False,不明,不明
+Perle Labs,なし,"・app.perle.xyzに参加、データタスクを完了してポイントを獲得、Discordに参加して役割（Explorer/Navigator/Voyager）を得る、Galxeクエストに参加、報酬のためのSeason 1に参加
+・Solanaウォレットを接続し、Xアカウント連携等の新しく公開された6つのタスクを完了させて「Perle Points」を蓄積する。",Solana,S,未完了,https://x.com/PerleLabs,Solana,False,2262-04-11 23:47:16.854775807,2026-03-01T22:52:06.865112+00:00,False,不明,不明
+HelloTrade,未定,Waitlist登録、アプリ利用開始,未定,A,未完了,https://x.com/kiyo_crypt/status/1991506776026697973?s=20,MegaETH,False,2099-12-31 00:00:00.000000000,2026-03-01T22:52:06.867568+00:00,False,不明,不明
+IOPn,未定,OPN Testnet探索 + トークン取引,未定,A,未完了,https://x.com/HottieBabeGem/status/1993365224448311518?s=20,OPN Testnet,False,2099-12-31 00:00:00.000000000,2026-03-01T22:52:06.870065+00:00,False,不明,不明
+Omnera,未定,Xアカウント接続 + デイリーログイン,未定,A,完了,https://x.com/duta_crypto/status/1991446419043963002?s=20,Multi-chain,False,2099-12-31 00:00:00.000000000,2026-03-01T22:52:06.872350+00:00,False,不明,不明
+WCM,未定,Waitlist登録（wcm.inc）、testnet参加,未定,B,未完了,https://x.com/wcm_inc,MegaETH,False,2099-12-31 00:00:00.000000000,2026-03-01T22:52:06.874540+00:00,False,不明,不明
+Obex Incubator,未定,12週プログラム応募、USDSデポジット,未定,B,完了,https://x.com/obexincubator,Multi-chain,False,2099-12-31 00:00:00.000000000,2026-03-01T22:52:06.877231+00:00,False,不明,不明
+Nous Research,未定,Discord Office Hours参加 + 計算資源提供,未定,B,完了,https://x.com/NousResearch/status/1993367621446910237?s=20,Multi-chain,False,2099-12-31 00:00:00.000000000,2026-03-01T22:52:06.879921+00:00,False,不明,不明
+Tenbin Labs,未定,"['Tenbin Labsのウェイトリストにメールアドレスで参加する。', '参加用URL: https://tenbinlabs.xyz']
+・['Tenbin Labsのウェイトリストにメールアドレスで参加する。', '参加用URL: https://tenbinlabs.xyz', '登録済みTwitterアカウント: @yamadatarou43', '資金調達: $4.5M (Polychain, Hack VC等)']
+・プロジェクト名: MegaCorp Global / 内容: ・MegaETH上の「Cube」を破壊するゲームに参加し、ブロックを破壊してCUBEを獲得 ・賞金総額 1,000,000 (ファイナルブロー賞あり) ・公式サイト(megacorp.global)からApply / 登録済みTwitter: @yamadatarou43 / 資金調達: $20M (Dragonfly, Vitalik Buterin等)
+・Tenbin Labsのウェイトリストにメールアドレスで参加する。参加用URL: https://tenbinlabs.xyz（登録済みTwitter: @yamadatarou43 / 資金調達: $4.5M Polychain等）",不明,B,完了,https://x.com/BankeraDao/status/2023238744027853144?s=20,,False,2099-12-31 00:00:00.000000000,2026-03-01T22:52:06.882198+00:00,False,不明,不明
+MegaCorp Global,未定,"・MegaETH上の「Cube」を破壊するゲームに参加し、ブロックを破壊して $CUBE を獲得
+・賞金総額 $1,000,000 (ファイナルブロー賞あり)
+・公式サイト(megacorp.global)からApplyを行い参加申請する
+・・ウェイトリスト登録済み（アカウント: @yamadatarou43）
+・MegaETH上の「Cube」を破壊するゲームに参加し、ブロックを破壊して $CUBE を獲得
+・賞金総額 $1,000,000 (ファイナルブロー賞あり)
+・公式サイト(megacorp.global)からApplyを行い参加申請する",MegaETH,S,未完了,https://x.com/MegaCorpHQ/status/2023759348267446575,,False,2099-12-31 00:00:00.000000000,2026-03-01T22:52:06.884816+00:00,False,不明,不明
+Dreamcash,未定,Hyperliquid向けモバイル取引アプリ。USDTを担保としたHIP-3「CASH」パーペチュアル市場（S&P 500、金・銀、TSLAなどのRWA）での取引。メールログインによるウォレット作成とセルフカストディ管理。Tetherからの戦略的出資を受けている。,Hyperliquid,A,未完了,https://x.com/kiyo_crypt/status/2023668745852588068?s=20,,False,2099-12-31 00:00:00.000000000,2026-03-01T22:52:06.887763+00:00,False,不明,不明
+Arc Testnet Early Participation,2026/12/31 23:59,"Arc Testnet上のDApp（Meridian Finance, ArcTreasury等）を使用。",Arc Testnet,C,完了,https://x.com/VaultWatcher/status/2022240597621547219,,False,2262-04-11 23:47:16.854775807,2026-03-01T22:52:06.890469+00:00,False,不明,不明
+HeadStarter Prism Market INO,2026/03/06 23:59,HederaネットワークでのINOに参加。ホワイトリスト取得が必要な可能性あり。,Hedera,B,完了,https://x.com/HeadStarter/status/2022254604071924181,,False,2262-04-11 23:47:16.854775807,2026-03-01T22:52:06.893548+00:00,False,不明,不明
+Robinhood Chain Testnet,未定,"・Faucetを取得（Googleログイン必須）
+・Sepolia ⇄ Robinhood Chain間での往復ブリッジ実行（Arbitrum Portal使用）
+・Synthra DEXでのSwapおよび流動性提供（LP）
+・OmniHubでのNFTミント
+・Superboardのキャンペーンクエスト完了（任意）",Robinhood Chain (Testnet),A,未完了,https://x.com/tippy_crypto/status/2022536466258358624?s=20,,False,2099-12-31 00:00:00.000000000,2026-03-01T22:52:06.895564+00:00,False,不明,不明
+Backpack,2026/02/28 23:59,"・TGEに向けた認証手続きの実施。モバイル版でフリーズする場合はアプリ再起動後に実績を確認すること。
+・（推測・準備）将来発行されるBackpackトークンを1年以上ステーキングすることによる、会社株式（Equity）への交換権利獲得の準備。CEO発言に基づく構想段階。
+・プラットフォームトークンを1年間ステーキングすることで会社株式の20%分配対象となる。今後3週間以内に実施予定のTGE/エアドロップに向け、ポイントの蓄積やエコシステムへの貢献を行う。トークン供給量の24%がポイント保有者に割り当て予定。
+・KYC（本人確認）の完了、Spot/Perpでの取引によるポイント蓄積、IPO waitlist（オンライン実株式トークン化）への登録、Mad Lads NFTの保有、およびTGE（トークン発行）後のトークンステーキングによる会社株式スワップへの参加",Solana,S,完了,,,True,2262-04-11 23:47:16.854775807,2026-03-01T22:52:06.897597+00:00,True,不明,不明
+Symbiotic,2026/02/25 23:59,コミュニティハブがDiscordからTelegramへ移行。公式Telegramチャンネルおよびグループへの参加。過去のXPやロールは継承される。,Ethereum,B,完了,,,False,2262-04-11 23:47:16.854775807,2026-03-01T22:52:06.903775+00:00,False,不明,不明
+Bless,2026/02/28 23:59,Chapter 1完了（99%済）に伴う、最後の誓い（Oaths）の完了および次フェーズの展開を監視。,未定,B,未完了,,,False,2262-04-11 23:47:16.854775807,2026-03-01T22:52:06.906820+00:00,False,不明,不明
+SphinxProtocol,2026/03/31 23:59,"・テストネット開始前の早期参加準備。コモディティ派生商品プラットフォーム。近日開始予定。
+・Pre-Testnet XPの獲得（コミュニティミッション、議論への貢献）、Galxe連携タスクの実行。",不明,A,完了,公式発表,,False,2262-04-11 23:47:16.854775807,2026-03-01T22:52:06.911098+00:00,False,不明,不明
+ZugChain,2026/12/31 23:59,"・L1テストネットへの参加。$5.5MのPre-Seed調達済み。現在実施中。
+・インセンティブ付きテストネットへの参加。公式サイトから登録し、ネットワーク貢献タスクを実行。",ZugChain,B,完了,公式発表,,False,2262-04-11 23:47:16.854775807,2026-03-01T22:52:06.915243+00:00,False,不明,不明
+Fair Shares,2026/12/31 23:59,デイリーチェックイン。無料参加可能だが資金調達情報に不確実性あり。リスクに注意。,不明,C,完了,X（Twitter）分析,,False,2262-04-11 23:47:16.854775807,2026-03-01T22:52:06.919690+00:00,False,不明,不明
+Sonic Labs Arcade (旧Fantom),未定 (メインネット移行まで),Sonic testnetに接続し、無料トークンを請求。PlinkoやMinesなどのゲームをプレイしてポイントを獲得（現在はメインネット準備のためゲーム閉鎖中だが、ポイントは移行後も有効）,Sonic Testnet,A,未完了,https://x.com/SonicLabs,,False,2262-04-11 23:47:16.854775807,2026-03-01T22:52:06.923499+00:00,False,不明,不明
+Perpl,2026/03/20 18:41,"・テストネット参加によるホワイトリスト登録者として、プライベートメインネットで取引・操作を実行
+・プライベートメインネットのウェイトリストへの申請（Wave 1）",Perpl Private Mainnet,A,完了,https://x.com/perpltrade,,False,2099-12-31 00:00:00.000000000,2026-03-01T22:52:06.928207+00:00,False,不明,不明
+ZugChain Validator Program,未定,バリデーターノードを実行（4Core/8GB RAM）し、ジェネシスバリデーター100枠に応募,ZugChain,A,完了,https://x.com/ZugChain_org,,False,2099-12-31 00:00:00.000000000,2026-03-01T22:52:06.931257+00:00,False,不明,不明
+Arcadia Games,未定,オープンベータ登録後、資金を入金しPvPマッチに3回以上参加,不明,C,完了,https://x.com/ArcadiaGamesIO,,False,2099-12-31 00:00:00.000000000,2026-03-01T22:52:06.934926+00:00,False,不明,不明
+Ritual,未定,ドキュメントに基づきRitualノードのセットアップおよび運営を行う,Ritual,C,未完了,https://x.com/ritualnet,,False,2099-12-31 00:00:00.000000000,2026-03-01T22:52:06.939301+00:00,False,不明,不明
+Tide Protocol,終了日未定,Suiテストネットへ切り替え（Slush Wallet推奨）後、faucetでテストトークンを取得。2 SUI以上入金してSupporter Pass NFTを獲得し、NFTの売買・貸借・リワード請求（1時間毎）を通じてリーダーボードのポイントを貯める。,Sui Testnet,S,完了,https://x.com/tidedotam,,False,2262-04-11 23:47:16.854775807,2026-03-01T22:52:06.942501+00:00,False,不明,不明
+Stabilizer,2026/02/23 02:35,"・ゼロスリッページDEXのテストネット参加に向けたホワイトリスト登録。報酬として独占的NFTが約束されている。
+・MMACH4でホワイトリスト確定",未定（テストネット）,A,未完了,https://x.com/StabilizerFi,,False,2262-04-11 23:47:16.854775807,2026-03-01T22:52:06.945591+00:00,False,不明,不明
+Alchemy Chain,2026/02/23 00:00,"・月23日開始のテストネットに参加。技術的なテストへの参加が必要な可能性あり。既存のACHトークンのユーティリティ向上に関連。
+・開発者向けRPCエンドポイントを使用したテストネット接続、コントラクトのデプロイ、トランザクションテストの実施、フィードバックの提供。
+・L1テストネットのexplorerおよびfaucetでのテスト実行、dAppの展開、Proof-of-Authority（PoA）コンセンサステストへの参加。
+・L1テストネットのExplorerおよびFaucetの利用、Developer docsに基づいたdAppの展開、Proof-of-Authority(PoA)コンセンサステストへの参加",Alchemy Chain (Testnet),B,完了,https://x.com/AlchemyPay,,False,2262-04-11 23:47:16.854775807,2026-03-01T22:52:06.949624+00:00,False,不明,不明
+Prism Market,2026/03/06 23:59,2026年2月26日から3月6日の期間にHederaネットワークで開催されるINO（初期NFTオファリング）に参加する。,Hedera,B,完了,https://x.com/HeadStarterHQ,,False,2262-04-11 23:47:16.854775807,2026-03-01T22:52:06.953915+00:00,False,不明,不明
+3look_io,終了日未定,"・プラットフォームにコンテンツを投稿し、「3look」または「@3look_io」をメンションしてLøøkz Pointsを獲得。友人招待でも追加ポイント獲得可能。
+・Xアカウントの連携、コンテンツ投稿によるLøøkzポイントの獲得（毎日20〜30分程度）",Social,C,未完了,https://x.com/3look_io,,False,2262-04-11 23:47:16.854775807,2026-03-01T22:52:06.958028+00:00,False,不明,不明
+Pharos Network,2026/06/30 23:59,テストネットでのDeFiアプリ利用および取引実行。Discordコミュニティへの参加とロール獲得、ポイントランキングの上位維持。,Pharos Network (L1),A,完了,https://x.com/pharos_network,,False,2262-04-11 23:47:16.854775807,2026-03-01T22:52:06.961599+00:00,False,不明,不明
+Mutuum Finance,2026/09/30 23:59,Sepoliaテストネットでの非保管型レンディングプロトコルの機能検証。バグ報告の提供。V1プロトコルのテスト参加。,Ethereum (Sepolia Testnet),A,完了,https://phemex.com/news/article/solana-holds-80-support-as-mutuum-finance-gains-19000-holders-62028,,False,2262-04-11 23:47:16.854775807,2026-03-01T22:52:06.965487+00:00,False,不明,不明
+Helios,2026/06/30 23:59,KingdomStarterプラットフォームでのIDO参加。初期価格$0.02でのトークン購入（総供給5億トークン）。,Helios (I-PoSR L1),B,完了,未定,,False,2262-04-11 23:47:16.854775807,2026-03-01T22:52:06.969679+00:00,False,不明,不明
+Football.Fun,2026/06/30 23:59,Kraken LaunchまたはLEGIONプラットフォームでのIEO/ICO参加。詳細スケジュールの確認と登録。,未定,B,完了,未定,,False,2262-04-11 23:47:16.854775807,2026-03-01T22:52:06.975109+00:00,False,不明,不明
+Circle Nanopayments,2026/12/31 23:59,プライベートベータへの開発者申請。AIエージェント向けマイクロペイメント等のユースケース提案、テストネットでのガスフリーUSDC送信テスト。,Circle Ecosystem,C,完了,https://x.com/BuildOnCircle,,False,2262-04-11 23:47:16.854775807,2026-03-01T22:52:06.979614+00:00,False,不明,不明
+Miden,2026/06/30 23:59,テストネットの利用（ウォレットインストール、トークン請求、ZoroSwapでの取引、Domeでのプライベート送金）およびMidenに関するオリジナルコンテンツ（解説スレッド、動画等）を作成しXで@0xMidenをタグ付けして投稿。,Miden (Polygon Labsスピンオフ / プライバシーL2),S,完了,https://x.com/0xMiden,,False,2262-04-11 23:47:16.854775807,2026-03-01T22:52:06.983315+00:00,False,不明,不明
+Nexus,2026/03/17 23:59,Node Rush Season 2への参加。app.nexus.xyzでのNode Runner登録、毎日ログインおよび週替わりクエストの完了。演算リソース提供によるCache Strikes獲得、ポイントによるNFT（Strike Glyphs）のミント。,Nexus (Verifiable Finance / L1),S,完了,https://app.nexus.xyz/,,False,2262-04-11 23:47:16.854775807,2026-03-01T22:52:06.987680+00:00,False,不明,不明
+Nesa (NES),2026/12/31 23:59,"・AIノードの設置（GitHubガイド参照）または、beta.nesa.ai/rewardsでのAI推論（AI Card）実行によるXPファーミングの継続。
+・ウェイトリストに登録済み（アカウント: sanjiao723@gmail.com）",Nesa (AIインフラ),A,未完了,https://beta.nesa.ai/rewards,,False,2262-04-11 23:47:16.854775807,2026-03-01T22:52:06.991119+00:00,False,不明,不明
+Euphoria,2026/03/09 23:59,Tapathon テストネット（Week 2）への参加。テストネットサイトにてモバイルオプション取引ゲーム（タップによる仮想トレード）を実行。※Week 2は2/23から14日間限定。,MegaETH,A,未完了,https://testnet.euphoria.finance/,,False,2262-04-11 23:47:16.854775807,2026-03-01T22:52:06.994576+00:00,False,不明,不明
+Hypercroc,2026/04/30 23:59,ソフトスワンプ・ボルトへのUSDT/USDC預け入れ。預け入れ期間に応じたXPファーミング（早期参加者には最大2.2倍のマルチプライヤーあり）。,Hypercroc (DeFi),C,完了,https://x.com/Hypercroc_xyz,,False,2262-04-11 23:47:16.854775807,2026-03-01T22:52:06.997531+00:00,False,不明,不明
+Unicity / Dome / Republic Technologies,未定,新規資金調達プロジェクトとしてのウォッチリスト登録。公式Xアカウントのフォローおよび最新のテストネット告知待機。,AI/予測市場インフラ,C,完了,,,False,2099-12-31 00:00:00.000000000,2026-03-01T22:52:07.000772+00:00,False,不明,不明
+Arc (Circle),なし,パブリックテストネットに完全無料で参加。Faucetからテストトークンを取得し、デプロイ、ブリッジ、トレード等のインタラクションを5回以上行うことが推奨。,Arc (Circle L1),A,未完了,なし,,False,2262-04-11 23:47:16.854775807,2026-03-01T22:52:07.003628+00:00,False,不明,不明
+GenLayer,なし,報酬ポイント制度「Rally」に参加。公式待機リスト登録やタスク完了でポイントを蓄積。テストネット「Bradbury」でのコントラクトデプロイやバリデータ参加も検討。,GenLayer,B,未完了,なし,,False,2262-04-11 23:47:16.854775807,2026-03-01T22:52:07.007844+00:00,False,不明,不明
+Axis Robotics,なし,公開された操作ガイドに従い、シビル対策を考慮したバイオニック的な挙動を伴うインタラクションを完了させる。,なし,B,完了,なし,,False,2262-04-11 23:47:16.854775807,2026-03-01T22:52:07.012709+00:00,False,不明,不明
+Piggybank.fi,なし（早期）,Solana基盤のプラットフォームでステーブルコインを運用（最大22% APY）し、将来的なエアドロップ対象となる「Oinks」ポイントを貯める。,Solana,B,完了,https://twitter.com/PiggybankFi,,False,2262-04-11 23:47:16.854775807,2026-03-01T22:52:07.017458+00:00,False,不明,不明
+ssv.network,なし（テストネット期間中）,SSVステーキングのテストネットに参加。テストネット用SSVをステーキングしてcSSVを1:1で受け取り、蓄積されるETH報酬を確認・請求する。,Ethereum (Testnet),A,完了,https://twitter.com/ssv_network,,False,2262-04-11 23:47:16.854775807,2026-03-01T22:52:07.022672+00:00,False,不明,不明
+Polymer Labs,なし,"・Jumper Exchangeを利用してゼロスリッページブリッジを実行。トランザクションのスクリーンショットをXに投稿してキャンペーンに参加する。
+・エージェント向けApp Store「Obul」の発表。x402対応エージェントの発見、統合、支払いインフラの開発状況を確認。",Polymer / Multi-chain,B,未完了,なし,,False,2262-04-11 23:47:16.854775807,2026-03-01T22:52:07.027802+00:00,False,不明,不明
+ARO Network,未定（メインネット稼働まで）,"・公式Dashboardでのアカウント作成、Browser Nodeアプリのインストールおよび24時間稼働、Discordでのコミュニティロール取得、Jadeポイントの蓄積。
+・公式Dashboardでのアカウント作成、Browser Nodeアプリのインストールと24時間稼働、Discord参加によるコミュニティロール取得（3タスク）、Jadeポイントの蓄積",ARO Network (DePIN),A,完了,https://x.com/AroNetwork,,False,2262-04-11 23:47:16.854775807,2026-03-01T22:52:07.032467+00:00,False,不明,不明
+Kash,未定（Alpha期間限定）,"・Alpha登録による早期アクセス、X（Twitter）での@kash_botへの引用投稿による予測市場参加、AI追跡エンゲージメントを通じた$KASH蓄積。
+・Alpha登録による早期アクセス、公式X(@kash_bot)への引用投稿による予測市場参加、AI追跡ベースのエンゲージメントによる$KASH蓄積",Base Network,S,未完了,https://x.com/kash_bot,,False,2262-04-11 23:47:16.854775807,2026-03-01T22:52:07.037235+00:00,False,不明,不明
+OP NET,2026/03/17,"・公式テストネットポータルでのタスク実行、週次NFTクレーム、Vibecoding Challengeへの参加、Galxeでのタスク完了およびロール取得。
+・テストネットポータルでのタスク実行、週次NFTのクレーム、Vibecoding Challengeへの参加、Galxeでの34タスク完了およびロール取得",Bitcoin L1,A,未完了,https://x.com/opnetbtc,,False,2262-04-11 23:47:16.854775807,2026-03-01T22:52:07.041072+00:00,False,不明,不明
+idOS,2026/03/05,"・Tallyプラットフォーム上でのトークンセール（IDO）への参加。Uniswap継続クリアリングオークション方式によるトークン購入。
+・Tallyプラットフォーム上でのIDO参加、Uniswap継続クリアリングオークション方式によるトークン購入（価格：$0.035/IDOS）",Ethereum,B,完了,https://x.com/idOS_network,,False,2262-04-11 23:47:16.854775807,2026-03-01T22:52:07.044743+00:00,False,不明,不明
+Perceptron Network,未発表,"・Androidアプリのインストール、余剰帯域共有によるポイントファーミング、Intractでのhumanity proof（人間証明）の完了。
+・Androidアプリのインストール、余剰帯域共有によるポイントファーミング、IntractでのHumanity Proof（人間証明）の完了",Perceptron Network (DePIN),B,未完了,https://x.com/PerceptronNTWK,,False,2262-04-11 23:47:16.854775807,2026-03-01T22:52:07.048566+00:00,False,不明,不明
+t54ai,2026/03/31 23:59,"・公式X(@t54ai)のフォロー、Discordコミュニティへの参加、近日公開予定のウェイティングリスト登録（資金調達発表直後のため早期メンバー資格獲得が最優先）
+・ウェイトリスト登録済み（登録アドレス: xakahiro@live.jp）",不明（AIエージェント信頼インフラ）,S,未完了,https://x.com/Crypto_Dealflow/status/2027406997444825594,,False,2262-04-11 23:47:16.854775807,2026-03-01T22:52:07.052367+00:00,False,不明,不明
+Decibel,2026/03/31 23:59,"・メインネット(app.decibel.trade)へのアクセスと招待コード登録、毎日トレードによるストリーク維持、Season 0 Pointsの蓄積（1kボリュームで招待コード解除）
+・Aptosメインネットにてギルド（例：「Echo Dynasty」）に所属し、10ドル以上の預け入れと取引を行ってAMPポイントを獲得する（将来のエアドロップ権利）。
+・Decibelアプリでのアカウント作成（招待コード使用）、Guild Warsへの参加（10 USD預け入れ）、取引によるAMPポイント蓄積（最低1,000 USDの取引量）、DLPボルトへの流動性提供",Aptos,S,未完了,https://app.decibel.trade,,False,2262-04-11 23:47:16.854775807,2026-03-01T22:52:07.055557+00:00,False,不明,不明
+Yellow,2026/03/08 00:00,"・ウェイティングリスト登録(yellow.pro/waitlist)、公式X(@Yellow)のフォロー、Discordコミュニティ参加（3月8日のトークン&DEXローンチ前の登録が必須）
+・【登録済み】記号: MMACH４ / メール: xakahiro@gmail.com / ウェイティングリスト登録(yellow.pro/waitlist)完了。公式X(@Yellow)のフォロー、Discordコミュニティ参加（3月8日のトークン&DEXローンチ前の登録が必須）",クロスチェーン（Ripple関連）,S,未完了,https://yellow.pro/waitlist,,False,2262-04-11 23:47:16.854775807,2026-03-01T22:52:07.059555+00:00,False,不明,不明
+D3,2026/12/31 23:59,D3ネットワーク(app.d3.network)でのウォレット接続、無料ドメインの取得、ドメインの取引・管理活動による貢献スコアの蓄積,D3 Network,A,未完了,https://app.d3.network,,False,2262-04-11 23:47:16.854775807,2026-03-01T22:52:07.062946+00:00,False,不明,不明
+KAIO,2026/03/14 23:59,"Galxeでの3つのクエスト（Tokenization 1.0, Infrastructure Layer, Meet the CEO）完了によるLoyalty Points(80点)獲得、ウェイティングリスト登録",不明（Galxe経由）,A,未完了,https://app.galxe.com/quest/KAIO/GCqustYxEZ,,False,2262-04-11 23:47:16.854775807,2026-03-01T22:52:07.066768+00:00,False,不明,不明
+dTelecom,2026/04/30 23:59,Galxe Phase#2への参加（ソーシャルタスク・NFTミント）、報酬プラットフォーム(rewards.dtelecom.org)でのポイントファーミング,不明（分散型通信）,B,完了,https://rewards.dtelecom.org/reward,,False,2262-04-11 23:47:16.854775807,2026-03-01T22:52:07.070184+00:00,False,不明,不明
+The Invention Network,2026/12/31 23:59,プラットフォーム(app.inventmoney.com)でのポイントファーミング実施（1回30分程度のタスク完了）,不明（金融イノベーション）,B,完了,https://app.inventmoney.com/r/JEGC2934,,False,2262-04-11 23:47:16.854775807,2026-03-01T22:52:07.073355+00:00,False,不明,不明
+Opinion Labs,2026/03/01 08:59,ネイティブトークン $OPN のエアドロップ受け取りアドレス登録。公式サイトで最大5つの自己管理型BNB Chainウォレットを指定。未登録は接続済みウォレットが対象。3月4日にトークンローンチ予定。,BNB Chain,S,完了,https://t.co/dFyi4iFk2w,,False,,2026-03-01T22:52:07.077016+00:00,,不明,不明
+Solstice,2026/03/31 23:59,3月のエアドロップ請求（Airdrop Claim）に向けて準備を行うこと。詳細は公式アナウンスを確認。,不明,B,完了,https://t.co/dFyi4iFk2w,,False,,2026-03-01T22:52:07.080257+00:00,,不明,不明
+Nige,2026/03/31 23:59,独自トークンのローンチに伴い、EthereumまたはBNB Chainのウォレットに公式コントラクトアドレスを追加して報酬を確認し、請求案内を確認する。,"Ethereum, BNB Chain",A,未完了,https://t.co/yiPpfqqcVy,,False,,2026-03-01T22:52:07.084052+00:00,,不明,不明
+T54 Labs,なし,シードラウンドで500万ドルの資金調達を完了。AIエージェント向けのアイデンティティおよびコンプライアンス基盤の開発状況を注視。,不明,C,未完了,https://t.co/SKjzSKxEj2,,False,,2026-03-01T22:52:07.087341+00:00,,不明,不明
+Sentient,なし,AI推論開発プラットフォーム「Arena」のローンチ。AI開発者は実世界のエンタープライズ推論タスクでの性能評価に参加可能。,不明,C,完了,不明,,False,,2026-03-01T22:52:07.090988+00:00,,不明,不明
+idOS Network,2026/03/10 00:00,コミュニティセールへの参加（平均500 USD）、デイリーチェックイン、ソーシャルタスク（X/Discord等）の完了によるポイント獲得,分散型IDネットワーク（Gnosis/Circle/Fabric Ventures支援）,S,完了,https://www.idos.network/blog/idos-consortium-partners-and-4-5m-funding-round,,False,,2026-03-01T22:52:07.095906+00:00,,不明,不明
+ForU AI,2026/03/31 23:59,プラットフォームへの登録、複数ソーシャルアカウントの連携、デイリークエストの完了によるレピュテーションスコア（バッジ）の構築,分散型ID（DID）,A,完了,https://pitchbook.com/profiles/company/741529-36,,False,,2026-03-01T22:52:07.100210+00:00,,不明,不明
+OP_NET (BitGlyphs),2026/03/17 00:00,OP_WALLETのインストール、テストネットrBTCの取得、テストネットでのBitGlyphs NFTミント、Motoswap等のdApps利用試行,Bitcoin L1,B,完了,https://opnet.org/odyssey/,,False,,2026-03-01T22:52:07.104048+00:00,,不明,不明
+Sentio / Fabric Protocol,2026/03/31 23:59,Binance WalletでのSTブースターイベント参加（最大3 BNB）、Binance Alphaポイントを消費してのROBOエアドロップ請求,BNB Chain (Binance Wallet),B,未完了,https://tokenterminal.com,,False,,2026-03-01T22:52:07.107568+00:00,,不明,不明
+Monad,不明,"・プロジェクトの進捗確認およびエコシステムへの参加準備（詳細は公式発表を参照）
+・プロジェクトの進捗確認およびエアドロップに向けた準備（詳細はソース元を確認）
+・プロジェクトの動向確認および早期参画の検討（入力テキストに具体的なタスク記載なし）
+・プロジェクトの動向確認およびエコシステムへの参加準備
+・プロジェクトの進捗確認およびエコシステムへの参加（詳細は要確認）
+・プロジェクトの進捗確認およびエコシステムへの参加準備（資金調達情報の確認）
+・詳細不明（入力テキストに基づく資金調達情報の確認およびプロジェクトの監視）
+・資金調達情報の確認およびプロジェクトの動向監視（入力テキストに具体的なタスクの記載なし）
+・プロジェクトの動向確認および情報収集（テキスト内に具体的なタスクの記載なし）
+・資金調達情報の確認および今後のエコシステム参加（詳細タスクは入力テキストに含まれていません）
+・詳細不明（プロジェクトの動向確認およびテストネット等への参加準備）
+・プロジェクトの動向確認およびエアドロップ関連タスクの実行
+・不明",Monad,S,完了,不明,,False,,2026-03-03T23:16:46.169161+00:00,,200M,Paradigm etc
+idOS (Identity Operating System),2026/03/05 23:00,1.Tallyで実施中のCCAセールPhase 2に参加（最低1 ETH〜）。2.Gate.io上場後の価格動向を監視。3.Krakenなど他取引所への上場を見越した短期売買の検討。,不明,B,完了,"Tally, Gate.io",,False,,2026-03-03T23:26:08.006693+00:00,,650万ドル,不明
+Perceptron Network (旧BlockMesh),不明 (リブランド直後・進行中),1.ブラウザ拡張機能(extension.perceptrons.xyz)をインストールし未使用帯域幅を共有。2.モバイルアプリをダウンロードしノードを稼働。3.データクエストを完了し「Prove your humanity」を実施。,不明,B,未完了,extension.perceptrons.xyz,,False,,2026-03-03T23:26:08.017184+00:00,,約2500万ドル,不明
+RealGo,2026/03/11 23:59,1.ゲームをダウンロードし、ロイヤリティポイントをファームする。2.PVPアリーナでバトルに参加し追加報酬を獲得。3.dApp(app.realgo.game)でオンチェーンアクションを行い、ポイント倍率(3倍)を獲得する。,不明,C,完了,app.realgo.game,,False,,2026-03-03T23:26:08.025241+00:00,,"不明 (報酬プール5,000ドル以上)",不明
+Canopy (Movement),不明 (テストネット稼働中),1.テストネットで$CNPYのステーキングを試行。2.Galxeクエストを完了しポイントを獲得。3.メインネット移行まで継続的に参加する。,Movement,C,完了,Galxe,,False,,2026-03-03T23:26:08.035871+00:00,,120万ドル,不明
+Helios (HLS),2026/03/31 23:59,1.KingdomStarterを監視し、IDOの具体的なスケジュールを確認。2.公式X(@helios_layer1)をフォロー。3.ホワイトリスト登録が開始されたら早期に参加する。,Helios (Modular L1),B,未完了,"KingdomStarter, @helios_layer1",,False,,2026-03-03T23:26:08.046205+00:00,,1705万ドル,不明
+SecantX AI (SECA),2026/03/31 23:59,1.KingdomStarterでIDO詳細を確認。2.プロジェクトの公式チャンネルをフォローし最新情報を追う。3.プライベートセール($0.05)の機会があれば参加を検討。,不明,C,完了,KingdomStarter,,False,,2026-03-03T23:26:08.056014+00:00,,不明,不明
+Opinion (OPN),2026/03/05 09:00,1.TGE後の価格動向を監視。2.エアドロップを受け取った場合は、信頼性低下による暴落リスクを考慮し即時売却を検討。,不明,C,完了,不明,,False,,2026-03-03T23:26:08.066581+00:00,,不明,不明
+Sanctum,不明（ウェイトリスト受付中）,"・Sanctum Appウェイトリスト登録済（xakahiro@live.jp）
+・$CLOUDのステーキング(sCLOUD)によるASR獲得とガバナンス参加
+・$INFの保有によるリワード獲得と利用実績の構築
+・Wonderland Season 3や「Cloud Pets」等の将来的なインセンティブに向けた公式情報の追跡",Solana,S,未完了,https://sanctum.so/app,,True,,2026-03-03T23:47:26.134185+00:00,,$37.2M,"Dragonfly, Sequoia Capital, Jump Capital, Solana Ventures, BOOGLE, Davo"
+Nexus Labs,2026/10/31 23:59,quest.nexus.xyzでのクエスト完了、Node Rushへの参加（ノード実行）、Rust zkVMへのコンピューティングリソース提供。,Nexus (zkVM),S,未完了,https://nexus.xyz/,,False,,2026-03-05T04:05:58.860758+00:00,,$25M,"Lightspeed (リード), Tier1投資家"
+RISE Chain,2026/10/31 23:59,Zenrise S1テストネットでのトランザクション実行、エコシステム内プロトコルの利用。,RISE Chain (L2),A,未完了,https://risechain.com/,,False,,2026-03-05T04:05:58.869324+00:00,,$9.2M,Vitalik Buterin (参加)
+Canopy Network,2026/10/31 23:59,Launchpad Testnetへの参加、One-Click Deploymentの実行、ノードの運用。,Canopy (AI L1),C,完了,https://canopynetwork.org/,,False,,2026-03-05T04:05:58.879033+00:00,,不明,不明
+XOOB,2026/10/31 23:59,XPキャンペーンへの参加、ハッシュタグ「#XOOBNetwork」を付けた毎日のSNS投稿。,XOOB Network,B,完了,https://x.com/XOOBNetwork,,False,,2026-03-05T04:05:58.890143+00:00,,$1.6M,不明
+RallyOnChain,2026/10/31 23:59,Waitlist登録、SNSへの投稿、リファラルを通じたポイント獲得。,RallyOnChain,C,完了,https://waitlist.rally.fun/,,False,,2026-03-05T04:05:58.899351+00:00,,不明（低調達）,不明
+Spaace,不明,NFTマーケットプレイスの利用、コミュニティ主導の配布（供給量の60%以上）への参加,不明,B,完了,spaace.io,,True,,2026-03-06T19:29:42.133982+00:00,,約$6M,"なし（コミュニティ主導）。エンジェル投資家・コミュニティとしてZeneca, Rug Radio, Nfinity Labs, Corgil, MoonBoots Capital, Smardex, Corgi Calls, Nexus Gaming, Kodama等が参加"
+Genesis Globe,2026/03/11 14:09,"・公式サイト（http://genesisglobe.xyz）にてWL（ホワイトリスト）の申請を行う（48時間限定）。また、3月11日にOpenSeaにてNFTのミントが実施される。
+・MMACH4でホワイトリスト登録済み",Ethereum,C,完了,http://genesisglobe.xyz,,True,,2026-03-09T05:09:21.108055+00:00,,不明,不明
+NekroMancers,不明（Discord内でのWL獲得は継続中）,"ミニゲームによるWLキャンペーンは終了。現在は以下でWL枠の獲得が可能：1. 公式Discordに参加し、コミュニティ活動を通じてWLを獲得する。2. コラボレーション枠についてCollab Manager（@xmartsol, @jayjaynft4）に連絡する。",Optimism (OP),C,未完了,https://discord.gg/kpuGHnHy,,True,,2026-03-09T05:33:49.735821+00:00,,不明,不明
+xStocks,不明（早期参加による20%ブーストは期間限定）,1. 公式サイトでウォレットを連携し、20%のポイントブーストを有効化する。 2. xStocksの保有、流動性提供、および貸付・借入（Borrow and Lend）市場を利用してxPointsを獲得する。,不明,C,未完了,http://defi.xstocks.fi/points,,False,,2026-03-11T05:15:19.887492+00:00,,不明,不明
+ZODL (Zcash Open Development Lab),不明,Zcashネイティブのプライバシーウォレット「ZODL」の利用。主なタスク候補：ウォレットの作成、取引所からのZEC入金、プライバシー保護側（shielded）への資金移動、アプリ内でのスワップ機能、CrossPay、Keystone連携、Flexa経由の決済機能の利用。,Zcash,S,未完了,https://x.com/kiyo_crypt,,False,,2026-03-11T05:16:50.152927+00:00,,$25M超,"Paradigm, a16z crypto, Coinbase Ventures"
+Theo Network (thUSD Genesis Program),2026/03/17 23:59,Genesis ProgramへのUSDCまたはthBILLの預け入れ。6週間のロック期間を経て、利回り（年化約8.3%）とポイント（エアドロップ対象の可能性）を獲得。Arbitrumチェーン推奨。,"Ethereum, Arbitrum",A,未完了,https://theo.xyz/articles/the-thusd-genesis-program-is-live,,True,,2026-03-11T05:18:58.794641+00:00,,$20M (Series A),"Hack VC, Anthos Capital, Manifold, Mirana, Metalayer, SCB, MEXC, Amber, Selini, Citadel, Jane Street, HRT, Optiver, IMC, JPMorgan"
+Fowlplay,不明,公式サイト（Fowlplay.fun）にて限定のホワイトリスト枠を確保する,Optimism (OP),C,未完了,http://Fowlplay.fun,,True,,2026-03-13T09:40:53.317323+00:00,,不明,不明
+VantageNFT,未定 (TBA),WL（ホワイトリスト）申請フォームへの登録（NFT供給量：969）,Ethereum,C,未完了,https://vantagenft.netlify.app,,True,,2026-03-13T09:42:11.883519+00:00,,不明,不明
+Moosies,不明,アンケートフォーム（Survey）への回答（300枠の確定フリーミント枠「GTD FREE MINT」が報酬）,Optimism (OP),C,未完了,https://tinyurl.com/5h4ejnrs,,True,,2026-03-13T09:48:38.264121+00:00,,不明,不明
+Noise,不明,公式サイトにアクセスし、メールアドレスを送信してウェイトリストに登録する。,不明,C,未完了,https://noise.xyz/?ref=EWFKQ9TL,,False,,2026-03-13T09:50:23.771868+00:00,,不明,不明
+Byreal,不明,1. SolanaベースのDEXにてRWA（金・銀・原油・株式）および仮想通貨のパーペチュアル取引（最大40倍レバレッジ）を行う。 2. bbSOL（Bybit backed SOL）を利用した運用（APY 9%）。 3. Hyperliquidのビルダーコード統合に基づき、GOLDやOILなどの銘柄を触ることで流動性提供や取引実績を作る。,Solana,A,未完了,https://twitter.com/byreal_io,,False,,2026-03-13T09:52:22.967843+00:00,,不明,"Bybit (インキュベーション), Hyperliquid (技術・流動性協力)"

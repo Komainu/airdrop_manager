@@ -7,6 +7,9 @@ from datetime import datetime, timedelta, timezone
 import os
 import time
 import threading
+
+# --- スプレッドシート書き込み用ロック (競合防止) ---
+_save_lock = threading.Lock()
 import streamlit.components.v1 as components
 import gspread
 from google.oauth2.service_account import Credentials
@@ -159,23 +162,83 @@ def get_worksheet():
     sheet = gc.open_by_url(SHEET_URL)
     return sheet.sheet1
 
-def save_tasks(df):
-    """DataFrameの内容をスプレッドシートに書き込む"""
+def get_x_news_worksheet():
+    scope = ['https://www.googleapis.com/auth/spreadsheets', 'https://www.googleapis.com/auth/drive']
+    creds_dict = dict(st.secrets["gcp_service_account"])
+    credentials = Credentials.from_service_account_info(creds_dict, scopes=scope)
+    gc = gspread.authorize(credentials)
+    sheet = gc.open_by_url(SHEET_URL)
     try:
-        ws = get_worksheet()
-        ws.clear()
-        # DataFrame の値をすべて文字列に変換してから書き込む
-        header = df.columns.values.tolist()
-        rows = df.astype(str).values.tolist()
-        ws.update([header] + rows)
+        return sheet.worksheet("Xニュース")
+    except gspread.exceptions.WorksheetNotFound:
+        # なければ作成する
+        return sheet.add_worksheet(title="Xニュース", rows="1000", cols="6")
+
+def load_x_news():
+    try:
+        ws = get_x_news_worksheet()
+        data = ws.get_all_values()
+        
+        if not data:
+            headers = ["日時", "アカウント", "URL", "タイトル", "ランク", "理由"]
+            ws.append_row(headers)
+            return pd.DataFrame(columns=headers)
+            
+        headers = data[0]
+        records = data[1:]
+        
+        if not records:
+            return pd.DataFrame(columns=headers)
+            
+        df = pd.DataFrame(records, columns=headers)
+        # 新しいものが上に来るように逆順
+        df = df.iloc[::-1].reset_index(drop=True)
+        return df
     except Exception as e:
-        st.error(f"スプレッドシート保存エラー: {e}")
+        print(f"Xニュース読み込みエラー: {e}")
+        return pd.DataFrame()
+
+
+def save_tasks(df):
+    """DataFrameの内容をスプレッドシートに書き込む（安全版）"""
+    try:
+        # 空のDataFrameでシートを上書きしない（データ消失防止）
+        if df.empty:
+            print("[save_tasks] ⚠️ DataFrameが空のため書き込みをスキップしました")
+            return
+
+        with _save_lock:  # 同時書き込みの競合を防止
+            ws = get_worksheet()
+            header = df.columns.values.tolist()
+            rows = df.astype(str).values.tolist()
+            all_data = [header] + rows
+
+            # 現在のシートの行数を取得し、足りない場合は空行でパディングして上書きする
+            # （clearとupdateの間に読み込みが走って空と誤認されるのを防ぐため、単一のupdateで上書き）
+            try:
+                sheet_data = ws.get_all_values()
+                current_rows = len(sheet_data)
+            except Exception:
+                current_rows = 1000  # 取得失敗時は余裕を持たせる
+
+            empty_row = [""] * len(header)
+            if len(all_data) < current_rows:
+                # 減った分の行を空文字で上書きする
+                padding_count = current_rows - len(all_data)
+                all_data.extend([empty_row] * padding_count)
+
+            # 単一のAPI呼び出しでアトミックに更新（旧データの消去含む）
+            ws.update(all_data)
+            print(f"[save_tasks] ✅ {len(rows)} 件を保存しました")
+    except Exception as e:
+        print(f"[save_tasks] ❌ スプレッドシート保存エラー: {e}")
 
 def load_tasks():
     required_cols = ["プロジェクト名", "期限", "タスク内容", "チェーン", "重要度", "ステータス", "ソースURL", "ピン留め", "登録日時", "資金調達額", "VC", "通知設定", "Telegram通知済み"]
     try:
-        ws = get_worksheet()
-        data = ws.get_all_values()
+        with _save_lock:  # 読み込み時もロックをかけて、保存処理中の中途半端な状態を読まないようにする
+            ws = get_worksheet()
+            data = ws.get_all_values()
 
         # シートが完全に空の場合（初回起動時）
         if not data:
@@ -189,7 +252,7 @@ def load_tasks():
             return pd.DataFrame(columns=required_cols)
         df = pd.DataFrame(records, columns=headers)
 
-        # 1. 必須カラムの補完
+        # 1. 必須カラムの補完（メモリ上のDataFrameのみ修正、シートへの書き戻しはしない）
         need_sheet_update = False
         for col in required_cols:
             if col not in df.columns:
@@ -200,16 +263,9 @@ def load_tasks():
                 else:
                     df[col] = None
 
-        # シートにカラムが不足していた場合、ヘッダーとデータを書き戻す
+        # カラム不足の場合は save_tasks() 経由で安全に書き戻す
         if need_sheet_update:
-            try:
-                header = df.columns.values.tolist()
-                rows = df.astype(str).values.tolist()
-                ws.clear()
-                ws.update([header] + rows)
-                print("[load_tasks] 新規カラム追加のためシートを更新しました")
-            except Exception as e:
-                print(f"[load_tasks] シート更新エラー: {e}")
+            print("[load_tasks] 新規カラムを補完しました（次回保存時にシートへ反映されます）")
 
         # --- 強力なデータクリーニング (Ver.11) ---
 
@@ -251,14 +307,8 @@ def load_tasks():
             mismatched_names = df.loc[pin_notify_mismatch, "プロジェクト名"].tolist()
             df.loc[pin_notify_mismatch, "通知設定"] = True
             print(f"[通知同期] ピン留め済みプロジェクトの通知設定をONに修正: {mismatched_names}")
-            try:
-                header = df.columns.values.tolist()
-                rows = df.astype(str).values.tolist()
-                ws.clear()
-                ws.update([header] + rows)
-                print("[通知同期] スプレッドシートに反映しました")
-            except Exception as e:
-                print(f"[通知同期] スプレッドシート更新エラー: {e}")
+            # save_tasks() 経由で安全に書き戻す（load_tasks内で直接clear+updateしない）
+            save_tasks(df)
 
         return df
     except Exception as e:
@@ -319,8 +369,11 @@ def _invalidate_cache():
     st.cache_data.clear()
 
 def save_tasks_async(df_copy):
-    """バックグラウンドで保存を実行する"""
-    threading.Thread(target=save_tasks, args=(df_copy,)).start()
+    """バックグラウンドで保存を実行する（ロックにより同時実行を防止）"""
+    if df_copy.empty:
+        print("[save_tasks_async] ⚠️ 空のDataFrameのため保存をスキップ")
+        return
+    threading.Thread(target=save_tasks, args=(df_copy,), daemon=True).start()
 
 def update_cached_and_save(df):
     st.session_state.cached_df = df
@@ -839,7 +892,7 @@ with st.expander("📊 プロジェクト一覧 (クリックで詳細へ移動)
 st.divider()
 
 # --- タブエリア ---
-tab1, tab2 = st.tabs(["📅 タスクリスト & 秘書チャット", "📝 新規一括登録"])
+tab1, tab2, tab3 = st.tabs(["📅 タスクリスト & 秘書チャット", "📝 新規一括登録", "🐦 AI X ニュース"])
 
 with tab1:
     with st.expander("💬 AI秘書と話す", expanded=False):
@@ -989,3 +1042,62 @@ with tab2:
                     st.rerun()
                 else:
                     st.error("AIがプロジェクト情報を抽出できませんでした。テキストを確認してください。")
+
+with tab3:
+    st.write("### 🐦 AIが厳選したXニュース")
+    st.caption("GASで定期取得し、Geminiが評価した重要ニュースを表示します。")
+    
+    col_a, col_b = st.columns([1, 4])
+    with col_a:
+        if st.button("🔄 更新", key="refresh_x_news", use_container_width=True):
+            st.rerun()
+            
+    x_df = load_x_news()
+    
+    if not x_df.empty:
+        for i, row in x_df.iterrows():
+            date_str = str(row.get("日時", ""))
+            account = str(row.get("アカウント", ""))
+            url = str(row.get("URL", ""))
+            title = str(row.get("タイトル", ""))
+            rank = str(row.get("ランク", ""))
+            reason = str(row.get("理由", ""))
+            
+            bg_color = "#ffffff"
+            if rank == "S":
+                bg_color = "#fff0f0"
+            elif rank == "A":
+                bg_color = "#fff9e6"
+                
+            with st.container(border=True):
+                st.markdown(f"<div style='background-color:{bg_color}; padding:10px; border-radius:6px;'>", unsafe_allow_html=True)
+                
+                st.markdown(f"**[{rank}ランク] @{account}** <small style='color:#666;'>({date_str})</small>", unsafe_allow_html=True)
+                st.markdown(f"<div style='font-size:1.05rem; margin:8px 0;'>{title}</div>", unsafe_allow_html=True)
+                
+                if reason and reason.lower() not in ["nan", "none", ""]:
+                    st.markdown(f"<div style='background:#f5f5f5; padding:6px; border-left:3px solid #ccc; font-size:0.9rem;'>💡 <b>AIの理由:</b> {reason}</div>", unsafe_allow_html=True)
+                
+                c1, c2, c3 = st.columns([1.5, 2, 2])
+                with c1:
+                    if url and url.startswith("http"):
+                        st.link_button("🔗 元ツイート", url, use_container_width=True)
+                with c2:
+                    if st.button("➕ タスクに追加", key=f"add_x_{i}", use_container_width=True):
+                        # タスク化処理
+                        task_data = {
+                            "プロジェクト名": f"{account}のニュース",
+                            "期限": "未定",
+                            "タスク内容": f"{title}\n\nAIの理由: {reason}\nURL: {url}",
+                            "チェーン": "未定",
+                            "重要度": rank if rank in ["S", "A", "B", "C"] else "C",
+                            "ソースURL": url
+                        }
+                        current_df = _get_cached_df()
+                        updated_df, _, _ = add_or_update_tasks(current_df, [task_data])
+                        st.session_state.cached_df = updated_df
+                        st.toast("✅ ニュースをタスクに追加しました！", icon="✅")
+                        st.rerun()
+                st.markdown("</div>", unsafe_allow_html=True)
+    else:
+        st.info("ニュースはまだありません。GASが実行されるとここに表示されます。")

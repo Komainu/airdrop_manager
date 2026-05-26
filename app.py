@@ -1043,6 +1043,27 @@ with tab2:
                 else:
                     st.error("AIがプロジェクト情報を抽出できませんでした。テキストを確認してください。")
 
+@st.cache_data(ttl=3600)
+def translate_to_japanese_v2(text):
+    if not text or len(str(text).strip()) == 0:
+        return text
+    # 直訳や中途半端な英語交じりを防ぐため、必ず翻訳APIを通す(すでに完全な日本語ならそのまま返るようにプロンプトで指示)
+    try:
+        model_name = get_working_model_name()
+        model = genai.GenerativeModel(model_name)
+        prompt = f"""
+        以下のテキストを自然で分かりやすい日本語に翻訳してください。
+        直訳ではなく、暗号資産のコンテキストに合わせたプロらしい滑らかな日本語にしてください。
+        ※もし入力テキストが既に日本語である場合は、翻訳せずにそのまま出力してください。
+        
+        テキスト:
+        {text}
+        """
+        response = model.generate_content(prompt)
+        return response.text.strip()
+    except Exception as e:
+        return text
+
 with tab3:
     st.write("### 🐦 AIが厳選したXニュース")
     st.caption("GASで定期取得し、Geminiが評価した重要ニュースを表示します。")
@@ -1063,32 +1084,92 @@ with tab3:
             rank = str(row.get("ランク", ""))
             reason = str(row.get("理由", ""))
             
-            bg_color = "#ffffff"
-            if rank == "S":
-                bg_color = "#fff0f0"
-            elif rank == "A":
-                bg_color = "#fff9e6"
+            # 強制翻訳
+            title_jp = translate_to_japanese_v2(title)
+            reason_jp = translate_to_japanese_v2(reason)
+            
+            # カラフルで視認性の高いデザイン
+            rank_styles = {
+                "S": {
+                    "bg": "linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%)",
+                    "text_color": "#800000",
+                    "badge_bg": "#d32f2f", "badge_text": "#ffffff", "icon": "🔥", "label": "Sランク (超重要)",
+                    "shadow": "rgba(255, 107, 129, 0.3)"
+                },
+                "A": {
+                    "bg": "linear-gradient(135deg, #f6d365 0%, #fda085 100%)",
+                    "text_color": "#5d4037",
+                    "badge_bg": "#f57c00", "badge_text": "#ffffff", "icon": "⭐", "label": "Aランク (重要)",
+                    "shadow": "rgba(253, 160, 133, 0.3)"
+                },
+                "B": {
+                    "bg": "linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%)",
+                    "text_color": "#1a237e",
+                    "badge_bg": "#1976d2", "badge_text": "#ffffff", "icon": "💠", "label": "Bランク (普通)",
+                    "shadow": "rgba(142, 197, 252, 0.3)"
+                },
+                "C": {
+                    "bg": "linear-gradient(135deg, #d4fc79 0%, #96e6a1 100%)",
+                    "text_color": "#1b5e20",
+                    "badge_bg": "#388e3c", "badge_text": "#ffffff", "icon": "✅", "label": "Cランク (参考)",
+                    "shadow": "rgba(150, 230, 161, 0.3)"
+                }
+            }
+            style = rank_styles.get(rank, {
+                "bg": "linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%)",
+                "text_color": "#212121",
+                "badge_bg": "#757575", "badge_text": "#ffffff", "icon": "📰", "label": f"{rank}ランク",
+                "shadow": "rgba(0,0,0,0.1)"
+            })
+            
+            with st.container(border=False):
+                html_content = f"""
+                <div style='
+                    background: {style["bg"]}; 
+                    padding: 20px; 
+                    border-radius: 12px; 
+                    box-shadow: 0 4px 15px {style["shadow"]}; 
+                    margin-bottom: 12px; 
+                    color: {style["text_color"]};
+                    position: relative;
+                '>
+                    <div style='margin-bottom: 12px;'>
+                        <span style='background-color: {style["badge_bg"]}; color: {style["badge_text"]}; padding: 4px 12px; border-radius: 20px; font-weight: bold; font-size: 0.85rem; box-shadow: 0 2px 4px rgba(0,0,0,0.2);'>
+                            {style["icon"]} {style["label"]}
+                        </span>
+                    </div>
+                    <div style='font-size: 1.3rem; font-weight: 800; margin-bottom: 16px; line-height: 1.5; text-shadow: 1px 1px 2px rgba(255,255,255,0.4);'>
+                        {title_jp}
+                    </div>
+                """
                 
-            with st.container(border=True):
-                st.markdown(f"<div style='background-color:{bg_color}; padding:10px; border-radius:6px;'>", unsafe_allow_html=True)
+                # AIの理由表示
+                if reason_jp == "AI判定エラー":
+                    html_content += f"<div style='background:rgba(255,255,255,0.7); padding:12px; border-radius: 8px; font-size:0.9rem; color: #d32f2f; font-weight:bold;'>⚠️ AI判定エラー: 評価の取得に失敗しました。詳細は元記事をご確認ください。</div>"
+                elif reason_jp and str(reason_jp).lower() not in ["nan", "none", ""]:
+                    html_content += f"<div style='background:rgba(255,255,255,0.65); padding:12px 16px; border-radius: 8px; font-size:0.95rem; color: #212121; line-height: 1.6; border-left: 4px solid {style['badge_bg']};'>💡 <b>AIの分析:</b><br>{reason_jp}</div>"
                 
-                st.markdown(f"**[{rank}ランク] @{account}** <small style='color:#666;'>({date_str})</small>", unsafe_allow_html=True)
-                st.markdown(f"<div style='font-size:1.05rem; margin:8px 0;'>{title}</div>", unsafe_allow_html=True)
+                # ニュースソースを右下に小さく配置
+                html_content += f"""
+                    <div style='text-align: right; margin-top: 16px; font-size: 0.7rem; opacity: 0.6; font-weight: bold;'>
+                        🏛️ {account} &nbsp;|&nbsp; 🕒 {date_str}
+                    </div>
+                </div>
+                """
                 
-                if reason and reason.lower() not in ["nan", "none", ""]:
-                    st.markdown(f"<div style='background:#f5f5f5; padding:6px; border-left:3px solid #ccc; font-size:0.9rem;'>💡 <b>AIの理由:</b> {reason}</div>", unsafe_allow_html=True)
+                st.markdown(html_content, unsafe_allow_html=True)
                 
+                # ボタン配置
                 c1, c2, c3 = st.columns([1.5, 2, 2])
                 with c1:
                     if url and url.startswith("http"):
-                        st.link_button("🔗 元ツイート", url, use_container_width=True)
+                        st.link_button("🔗 記事を読む", url, use_container_width=True)
                 with c2:
                     if st.button("➕ タスクに追加", key=f"add_x_{i}", use_container_width=True):
-                        # タスク化処理
                         task_data = {
                             "プロジェクト名": f"{account}のニュース",
                             "期限": "未定",
-                            "タスク内容": f"{title}\n\nAIの理由: {reason}\nURL: {url}",
+                            "タスク内容": f"{title_jp}\n\nAIの理由: {reason_jp}\nURL: {url}",
                             "チェーン": "未定",
                             "重要度": rank if rank in ["S", "A", "B", "C"] else "C",
                             "ソースURL": url
@@ -1098,6 +1179,6 @@ with tab3:
                         st.session_state.cached_df = updated_df
                         st.toast("✅ ニュースをタスクに追加しました！", icon="✅")
                         st.rerun()
-                st.markdown("</div>", unsafe_allow_html=True)
     else:
         st.info("ニュースはまだありません。GASが実行されるとここに表示されます。")
+

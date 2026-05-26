@@ -80,32 +80,27 @@ if "cached_df" not in st.session_state:
 if "memo_counter" not in st.session_state:
     st.session_state.memo_counter = 0
 
-# --- モデル実在確認ロジック (安全版) ---
+# --- モデル選択 (gemini-2.0-flash: 無料枠 1500リクエスト/日) ---
+import time as _time
+
 def get_working_model_name():
-    try:
-        all_models = list(genai.list_models())
-        text_models = [m.name for m in all_models if 'generateContent' in m.supported_generation_methods]
-        
-        if not text_models: return "models/gemini-1.5-flash"
+    return "models/gemini-2.0-flash"
 
-        stable_models = [
-            m for m in text_models 
-            if "exp" not in m and "2.0" not in m and "2.5" not in m and "gemma" not in m
-        ]
-        
-        flash_15 = next((m for m in stable_models if "1.5" in m and "flash" in m), None)
-        if flash_15: return flash_15
-        
-        pro_15 = next((m for m in stable_models if "1.5" in m and "pro" in m), None)
-        if pro_15: return pro_15
-        
-        any_flash = next((m for m in stable_models if "flash" in m), None)
-        if any_flash: return any_flash
-
-        if stable_models: return stable_models[0]
-        return text_models[0]
-    except:
-        return "models/gemini-1.5-flash"
+def _call_gemini_with_retry(model, prompt, max_retries=3):
+    """429 Quota Error 対策: リトライ付きでGemini APIを呼び出す"""
+    last_error = None
+    for attempt in range(max_retries):
+        try:
+            response = model.generate_content(prompt)
+            return response
+        except Exception as e:
+            last_error = e
+            if "429" in str(e) or "quota" in str(e).lower() or "resource" in str(e).lower():
+                wait = (attempt + 1) * 10  # 10秒, 20秒, 30秒
+                _time.sleep(wait)
+                continue
+            raise e
+    raise last_error
 
 # --- Telegram 通知機能 ---
 def send_telegram_notification(message):
@@ -558,7 +553,7 @@ def parse_memo_to_tasks(memo):
         入力: {memo}
         出力形式: [{{ "プロジェクト名": "...", "期限": "YYYY/MM/DD HH:MM", "タスク内容": "...", "チェーン": "...", "重要度": "S/A/B/C", "ソースURL": "...", "資金調達額": "...", "VC": "..." }}]
         """
-        response = model.generate_content(prompt)
+        response = _call_gemini_with_retry(model, prompt)
         match = re.search(r'\[.*\]', response.text, re.DOTALL)
         if match: 
             return json.loads(match.group())
@@ -628,7 +623,7 @@ def process_chat_command(user_input, current_df):
         }}
         ```
         """
-        response = model.generate_content(prompt)
+        response = _call_gemini_with_retry(model, prompt)
         response_text = response.text
         
         # === ここから置き換え ===

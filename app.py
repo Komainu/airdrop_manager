@@ -1044,24 +1044,23 @@ with tab2:
                 else:
                     st.error("AIがプロジェクト情報を抽出できませんでした。テキストを確認してください。")
 
-@st.cache_data(ttl=3600)
+@st.cache_data(ttl=3600, show_spinner=False)
 def translate_to_japanese_v2(text):
     if not text or len(str(text).strip()) == 0:
         return text
-    # 直訳や中途半端な英語交じりを防ぐため、必ず翻訳APIを通す(すでに完全な日本語ならそのまま返るようにプロンプトで指示)
-    try:
-        model_name = get_working_model_name()
-        model = genai.GenerativeModel(model_name)
-        prompt = f"""
-        以下のテキストを自然で分かりやすい日本語に翻訳してください。
-        直訳ではなく、暗号資産のコンテキストに合わせたプロらしい滑らかな日本語にしてください。
-        ※もし入力テキストが既に日本語である場合は、翻訳せずにそのまま出力してください。
+    
+    # 既に日本語が含まれている場合はスキップ (無駄なAPI呼び出しと誤訳を防ぐ)
+    if re.search(r'[ぁ-んァ-ン一-龥]', str(text)):
+        return text
         
-        テキスト:
-        {text}
-        """
-        response = model.generate_content(prompt)
-        return response.text.strip()
+    try:
+        # Geminiの制限（無料枠 15 RPM）を回避するため、無料の Google Translate API を使用
+        res = requests.get(
+            "https://translate.googleapis.com/translate_a/single",
+            params={"client": "gtx", "sl": "en", "tl": "ja", "dt": "t", "q": text},
+            timeout=5,
+        )
+        return "".join([x[0] for x in res.json()[0]])
     except Exception as e:
         return text
 

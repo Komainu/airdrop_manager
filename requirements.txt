@@ -4,3 +4,4 @@ google-generativeai
 gspread
 google-auth
 requests
+plotly

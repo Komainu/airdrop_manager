@@ -80,11 +80,11 @@ if "cached_df" not in st.session_state:
 if "memo_counter" not in st.session_state:
     st.session_state.memo_counter = 0
 
-# --- モデル選択 (gemini-2.0-flash: 無料枠 1500リクエスト/日) ---
+# --- モデル選択 (gemini-2.5-flash: 無料枠 1500リクエスト/日) ---
 import time as _time
 
 def get_working_model_name():
-    return "models/gemini-2.0-flash"
+    return "models/gemini-2.5-flash"
 
 def _call_gemini_with_retry(model, prompt, max_retries=3):
     """429 Quota Error 対策: リトライ付きでGemini APIを呼び出す"""

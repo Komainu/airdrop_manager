@@ -598,16 +598,16 @@ def render_task_card(index, row):
         if is_pinned and not is_completed:
             st.markdown(
                 f"""<style>
-                div[data-testid="stVerticalBlockBorderWrapper"]:has(#pinned-card-{index}) {{
-                    background-color: #fff3e0 !important;
-                }}
-                div[data-testid="stVerticalBlockBorderWrapper"]:has(#pinned-card-{index}) div[data-testid="column"]:nth-of-type(3) button {{
-                    background-color: #ef4444 !important;
-                    border-color: #ef4444 !important;
-                    color: white !important;
-                }}
-                </style>
-                <span id="pinned-card-{index}"></span>""",
+div[data-testid="stVerticalBlockBorderWrapper"]:has(#pinned-card-{index}) {{
+    background-color: #fff3e0 !important;
+}}
+div[data-testid="stVerticalBlockBorderWrapper"]:has(#pinned-card-{index}) div[data-testid="column"]:nth-of-type(3) button {{
+    background-color: #ef4444 !important;
+    border-color: #ef4444 !important;
+    color: white !important;
+}}
+</style>
+<span id="pinned-card-{index}"></span>""",
                 unsafe_allow_html=True
             )
             

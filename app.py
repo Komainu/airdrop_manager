@@ -211,12 +211,21 @@ def save_tasks(df):
                 padding_count = current_rows - len(all_data)
                 all_data.extend([empty_row] * padding_count)
             try:
-                ws.update(values=all_data, range_name="A1")
+                ws.update(values=all_data, range_name="A1", value_input_option="RAW")
             except TypeError:
-                ws.update("A1", all_data)
+                ws.update("A1", all_data, value_input_option="RAW")
             print(f"[save_tasks] ✅ {len(rows)} 件を保存しました")
+            try:
+                st.session_state["save_error"] = None
+            except:
+                pass
     except Exception as e:
-        print(f"[save_tasks] ❌ スプレッドシート保存エラー: {e}")
+        err_msg = str(e)
+        print(f"[save_tasks] ❌ スプレッドシート保存エラー: {err_msg}")
+        try:
+            st.session_state["save_error"] = err_msg
+        except:
+            pass
 
 def load_tasks():
     required_cols = ["プロジェクト名", "期限", "タスク内容", "チェーン", "重要度", "ステータス", "ソースURL", "ピン留め", "登録日時", "資金調達額", "VC", "通知設定", "Telegram通知済み"]
@@ -671,6 +680,8 @@ div[data-testid="stVerticalBlockBorderWrapper"]:has(#pinned-card-{index}) div[da
 # --- サイドバー ---
 with st.sidebar:
     st.header("⚙️ 管理設定")
+    if "save_error" in st.session_state and st.session_state["save_error"]:
+        st.error(f"スプレッドシート保存エラー: {st.session_state['save_error']}")
     if st.button("🔄 重複プロジェクトをクリーンアップ"):
         df = load_tasks()
         if not df.empty:

@@ -592,6 +592,22 @@ def render_task_card(index, row):
     if is_new: title_prefix += "🆕"
     st.markdown(f"<div id='project-anchor-{index}'></div>", unsafe_allow_html=True)
     with st.container(border=True):
+        if is_pinned and not is_completed:
+            st.markdown(
+                f"""<style>
+                div[data-testid="stVerticalBlockBorderWrapper"]:has(#pinned-card-{index}) {{
+                    background-color: #fff3e0 !important;
+                }}
+                div[data-testid="stVerticalBlockBorderWrapper"]:has(#pinned-card-{index}) div[data-testid="column"]:nth-of-type(3) button {{
+                    background-color: #ef4444 !important;
+                    border-color: #ef4444 !important;
+                    color: white !important;
+                }}
+                </style>
+                <span id="pinned-card-{index}"></span>""",
+                unsafe_allow_html=True
+            )
+            
         c_name, c_dead, c_pin, c_act, c_del, c_src = st.columns([4.5, 1.5, 0.45, 0.45, 0.45, 0.45])
         with c_name:
             st.markdown(
@@ -636,8 +652,8 @@ def render_task_card(index, row):
             )
         elif is_pinned and not is_completed:
             st.markdown(
-                "<div style='background:#fff3cd; border-left:3px solid #ff6b6b; "
-                "padding:4px 8px; border-radius:4px; font-size:0.85rem; color:#d84315; margin-bottom:4px;'>"
+                "<div style='background:#ff6d00; border-left:3px solid #d84315; "
+                "padding:4px 8px; border-radius:4px; font-size:0.85rem; color:white; font-weight:bold; margin-bottom:4px;'>"
                 "🔥 優先タスク (ピン留め/期限直近)</div>",
                 unsafe_allow_html=True
             )

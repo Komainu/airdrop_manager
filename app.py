@@ -210,7 +210,10 @@ def save_tasks(df):
             if len(all_data) < current_rows:
                 padding_count = current_rows - len(all_data)
                 all_data.extend([empty_row] * padding_count)
-            ws.update(all_data)
+            try:
+                ws.update(values=all_data, range_name="A1")
+            except TypeError:
+                ws.update("A1", all_data)
             print(f"[save_tasks] ✅ {len(rows)} 件を保存しました")
     except Exception as e:
         print(f"[save_tasks] ❌ スプレッドシート保存エラー: {e}")

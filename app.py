@@ -15,6 +15,7 @@ import gspread
 from google.oauth2.service_account import Credentials
 import requests
 import polymarket_dashboard
+import btc_dashboard
 
 # --- 設定 ---
 st.set_page_config(page_title="よてい帳", layout="wide")
@@ -768,7 +769,13 @@ with st.expander("📊 プロジェクト一覧 (クリックで詳細へ移動)
 st.divider()
 
 # --- タブエリア ---
-tab1, tab2, tab3, tab4 = st.tabs(["📅 タスクリスト & 秘書チャット", "📝 新規一括登録", "🐦 AI X ニュース", "📊 Polymarket予測"])
+tab1, tab2, tab3, tab4, tab5 = st.tabs([
+    "📅 タスクリスト & 秘書チャット",
+    "📝 新規一括登録",
+    "🐦 AI X ニュース",
+    "📊 Polymarket予測",
+    "📈 BTCマクロ"
+])
 
 with tab1:
     with st.expander("💬 AI秘書と話す", expanded=False):
@@ -983,3 +990,6 @@ with tab3:
 
 with tab4:
     polymarket_dashboard.render_polymarket_dashboard()
+
+with tab5:
+    btc_dashboard.render_btc_dashboard()

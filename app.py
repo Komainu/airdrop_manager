@@ -241,6 +241,7 @@ def load_tasks():
         if not records:
             return pd.DataFrame(columns=required_cols)
         df = pd.DataFrame(records, columns=headers)
+        df = df.loc[:, ~df.columns.duplicated()]
         need_sheet_update = False
         for col in required_cols:
             if col not in df.columns:
@@ -405,6 +406,9 @@ def parse_memo_locally(memo):
 
 # --- AI解析ロジック (重複定義を解消・1つに統合) ---
 def parse_memo_to_tasks(memo):
+    cache_key = f"parse_memo_{hash(memo)}"
+    if cache_key in st.session_state:
+        return st.session_state[cache_key]
     try:
         model_name = get_working_model_name()
         model = genai.GenerativeModel(model_name)
@@ -426,18 +430,26 @@ def parse_memo_to_tasks(memo):
         response = _call_gemini_with_retry(model, prompt)
         match = re.search(r'\[.*\]', response.text, re.DOTALL)
         if match:
-            return json.loads(match.group())
+            res = json.loads(match.group())
+            st.session_state[cache_key] = res
+            return res
         json_match = re.search(r'```(?:json)?\s*\n(.*?)\n```', response.text, re.DOTALL)
         if json_match:
-            return json.loads(json_match.group(1))
-        return parse_memo_locally(memo)
+            res = json.loads(json_match.group(1))
+            st.session_state[cache_key] = res
+            return res
+        res = parse_memo_locally(memo)
+        st.session_state[cache_key] = res
+        return res
     except Exception as e:
         err_msg = str(e)
         if "429" in err_msg or "quota" in err_msg.lower():
             st.warning("⚠️ AIの制限(クォータ超過)に達したため、ローカル解析で簡易登録しました。")
         else:
             st.warning(f"⚠️ AI解析エラーのため、ローカル解析で簡易登録しました。 ({e})")
-        return parse_memo_locally(memo)
+        res = parse_memo_locally(memo)
+        st.session_state[cache_key] = res
+        return res
 
 def add_or_update_tasks(existing_df, new_tasks, notify=True):
     updated_count = 0
@@ -485,10 +497,13 @@ def add_or_update_tasks(existing_df, new_tasks, notify=True):
     return existing_df, created_count, updated_count
 
 def process_chat_command(user_input, current_df):
+    tasks_text = current_df.to_string(index=False)
+    cache_key = f"chat_cmd_{hash(user_input + tasks_text)}"
+    if cache_key in st.session_state:
+        return st.session_state[cache_key]
     try:
         model_name = get_working_model_name()
         model = genai.GenerativeModel(model_name)
-        tasks_text = current_df.to_string(index=False)
         now_str = datetime.now().strftime("%Y年%m月%d日 %H:%M")
         prompt = f"""
         あなたはタスク・予定管理秘書です。
@@ -551,7 +566,9 @@ def process_chat_command(user_input, current_df):
                 action_data = json.loads(raw_json_match.group(1))
                 response_text = response_text.replace(raw_json_match.group(0), "").strip()
             except: pass
-        return response_text, action_data, model_name
+        res = (response_text, action_data, model_name)
+        st.session_state[cache_key] = res
+        return res
     except Exception as e:
         return f"エラー: {e}", None, "Unknown"
 
@@ -851,11 +868,18 @@ with tab2:
     st.write("### 📝 テキストから一括登録")
     raw_memo = st.text_area("ここに情報を貼り付け", height=150, key=f"memo_input_{st.session_state.memo_counter}")
     if st.button("AIに登録させる", type="primary"):
+        import time
+        now = time.time()
+        last_submit_time = st.session_state.get("last_submit_time", 0)
+        
         if not api_key:
             st.error("APIキーが必要です")
         elif not raw_memo.strip():
             st.warning("テキストを入力してください")
+        elif now - last_submit_time < 30:
+            st.warning("⚠️ 連続投稿を防ぐため、30秒ほどお待ちください。")
         else:
+            st.session_state.last_submit_time = now
             with st.spinner("解析中..."):
                 new_tasks = parse_memo_to_tasks(raw_memo)
                 if new_tasks:
@@ -871,7 +895,7 @@ with tab2:
                 else:
                     st.error("プロジェクト情報を抽出できませんでした。テキストを確認してください。")
 
-@st.cache_data(ttl=3600, show_spinner=False)
+@st.cache_data(ttl=86400, show_spinner=False)
 def translate_to_japanese_v2(text):
     if not text or len(str(text).strip()) == 0:
         return text

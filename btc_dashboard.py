@@ -86,7 +86,6 @@ def fmt_pct(val, decimals=2):
 
 def render_btc_dashboard():
     st.markdown("### 📈 BTCマクロダッシュボード")
-
     fred_key = ""
     try:
         fred_key = st.secrets.get("FRED_API_KEY", "")
@@ -98,20 +97,18 @@ def render_btc_dashboard():
             type="password", key="fred_key_input",
             help="無料取得: https://fred.stlouisfed.org/docs/api/api_key.html"
         )
-
     if st.button("🔄 データ更新", key="btc_refresh"):
         if "btc_cache" in st.session_state:
             del st.session_state["btc_cache"]
-
     if "btc_cache" not in st.session_state:
         with st.spinner("データ取得中..."):
             cache = {
-                "btc":      fetch_btc_data(),
+                "btc":       fetch_btc_data(),
                 "dominance": fetch_dominance(),
-                "fng":      fetch_fear_greed(),
-                "stable":   fetch_stablecoin(),
-                "funding":  fetch_funding_rate(),
-                "fred":     {}
+                "fng":       fetch_fear_greed(),
+                "stable":    fetch_stablecoin(),
+                "funding":   fetch_funding_rate(),
+                "fred":      {}
             }
             if fred_key:
                 cache["fred"] = {
@@ -123,7 +120,6 @@ def render_btc_dashboard():
                     "m2":    fetch_fred_series("M2SL",     fred_key, 24),
                 }
             st.session_state.btc_cache = cache
-
     cache   = st.session_state.btc_cache
     btc     = cache.get("btc")
     fng     = cache.get("fng")
@@ -131,11 +127,10 @@ def render_btc_dashboard():
     funding = cache.get("funding")
     dom     = cache.get("dominance")
     fred    = cache.get("fred", {})
-
     st.markdown("#### 💰 BTCリアルタイム指標")
     c1, c2, c3, c4 = st.columns(4)
     with c1:
-        price  = btc["price"]     if btc else None
+        price  = btc["price"]      if btc else None
         change = btc["change_24h"] if btc else None
         st.metric("BTC価格", f"${price:,.0f}" if price else "---",
                   delta=fmt_pct(change) if change is not None else None)
@@ -145,11 +140,9 @@ def render_btc_dashboard():
         st.metric("24h出来高", fmt_large(btc["volume_24h"] if btc else None))
     with c4:
         st.metric("BTC優位性", f"{dom:.1f}%" if dom else "---")
-
     st.divider()
     st.markdown("#### 🧭 市場センチメント")
     c1, c2, c3 = st.columns(3)
-
     with c1:
         if fng:
             val = fng["value"]
@@ -161,53 +154,29 @@ def render_btc_dashboard():
                 "Extreme Greed":("🟢 極度の強欲", "#10b981"),
             }
             label, color = cls_map.get(fng["classification"], (fng["classification"], "#94a3b8"))
-            st.markdown(f"""
-            <div style="background:#1e2028;border-radius:12px;padding:20px;text-align:center;border:1px solid {{color}}44;">
-                <div style="font-size:0.8rem;color:#94a3b8;margin-bottom:6px;">😱 Fear & Greed Index</div>
-                <div style="font-size:3rem;font-weight:900;color:{{color}};line-height:1;">{{val}}</div>
-                <div style="font-size:1rem;color:{{color}};font-weight:700;margin-top:6px;">{{label}}</div>
-            </div>
-            """, unsafe_allow_html=True)
+            st.markdown(f'<div style="background:#1e2028;border-radius:12px;padding:20px;text-align:center;border:1px solid {color}44;"><div style="font-size:0.8rem;color:#94a3b8;">😱 Fear & Greed</div><div style="font-size:3rem;font-weight:900;color:{color};">{val}</div><div style="font-size:1rem;color:{color};font-weight:700;">{label}</div></div>', unsafe_allow_html=True)
         else:
             st.warning("Fear & Greedデータ取得失敗")
-
     with c2:
         if stable:
             ch = stable["change_24h"]
             ch_color = "#10b981" if ch >= 0 else "#ef4444"
-            st.markdown(f"""
-            <div style="background:#1e2028;border-radius:12px;padding:20px;border:1px solid #33363f;">
-                <div style="font-size:0.8rem;color:#94a3b8;margin-bottom:6px;">💵 ステーブルコイン時価総額</div>
-                <div style="font-size:2rem;font-weight:800;color:#f1f5f9;">{{fmt_large(stable["total"])}}</div>
-                <div style="font-size:0.8rem;color:#94a3b8;margin-top:10px;">
-                    USDT: {{fmt_large(stable["usdt"])}}<br>USDC: {{fmt_large(stable["usdc"])}}
-                </div>
-                <div style="font-size:0.85rem;color:{{ch_color}};margin-top:6px;">24h変化: {{fmt_pct(ch)}}</div>
-            </div>
-            """, unsafe_allow_html=True)
+            st.markdown(f'<div style="background:#1e2028;border-radius:12px;padding:20px;border:1px solid #33363f;"><div style="font-size:0.8rem;color:#94a3b8;">💵 ステーブルコイン時価総額</div><div style="font-size:2rem;font-weight:800;color:#f1f5f9;">{fmt_large(stable["total"])}</div><div style="font-size:0.8rem;color:#94a3b8;margin-top:8px;">USDT: {fmt_large(stable["usdt"])}<br>USDC: {fmt_large(stable["usdc"])}</div><div style="font-size:0.85rem;color:{ch_color};margin-top:4px;">24h: {fmt_pct(ch)}</div></div>', unsafe_allow_html=True)
         else:
             st.warning("ステーブルコインデータ取得失敗")
-
     with c3:
         if funding is not None:
             if funding > 0.05:
-                f_color, f_status, f_bg = "#ef4444", "🔴 ロング過熱 — 警戒", "#2d1515"
+                fc, fs, fb = "#ef4444", "🔴 ロング過熱 — 警戒", "#2d1515"
             elif funding > 0.01:
-                f_color, f_status, f_bg = "#f97316", "🟡 やや強気 — 注意", "#2d2010"
+                fc, fs, fb = "#f97316", "🟡 やや強気 — 注意", "#2d2010"
             elif funding >= -0.01:
-                f_color, f_status, f_bg = "#22c55e", "🟢 中立 — 安定",    "#122d1a"
+                fc, fs, fb = "#22c55e", "🟢 中立 — 安定", "#122d1a"
             else:
-                f_color, f_status, f_bg = "#3b82f6", "🔵 ショート優勢",    "#10192d"
-            st.markdown(f"""
-            <div style="background:{{f_bg}};border-radius:12px;padding:20px;border:1px solid {{f_color}}55;">
-                <div style="font-size:0.8rem;color:#94a3b8;margin-bottom:6px;">📊 Binance Funding Rate</div>
-                <div style="font-size:2.2rem;font-weight:900;color:{{f_color}};line-height:1;">{{funding:.4f}}%</div>
-                <div style="font-size:0.9rem;font-weight:700;color:{{f_color}};margin-top:8px;">{{f_status}}</div>
-            </div>
-            """, unsafe_allow_html=True)
+                fc, fs, fb = "#3b82f6", "🔵 ショート優勢", "#10192d"
+            st.markdown(f'<div style="background:{fb};border-radius:12px;padding:20px;border:1px solid {fc}55;"><div style="font-size:0.8rem;color:#94a3b8;">📊 Binance Funding Rate</div><div style="font-size:2.2rem;font-weight:900;color:{fc};">{funding:.4f}%</div><div style="font-size:0.9rem;font-weight:700;color:{fc};margin-top:6px;">{fs}</div></div>', unsafe_allow_html=True)
         else:
             st.warning("Funding Rateデータ取得失敗")
-
     if fred and any(fred.values()):
         st.divider()
         st.markdown("#### 🏦 マクロ金利指標（FRED）")
@@ -217,45 +186,21 @@ def render_btc_dashboard():
         dgs10 = fred.get("dgs10", [])
         dxy   = fred.get("dxy",   [])
         m2    = fred.get("m2",    [])
-
         c1, c2, c3, c4, c5 = st.columns(5)
-        with c1: st.metric("SOFR",     f"{{sofr[0]['value']:.2f}}%"  if sofr  else "---")
-        with c2: st.metric("IORB",     f"{{iorb[0]['value']:.2f}}%"  if iorb  else "---")
-        with c3: st.metric("EFFR",     f"{{effr[0]['value']:.2f}}%"  if effr  else "---")
-        with c4: st.metric("米10年債", f"{{dgs10[0]['value']:.2f}}%" if dgs10 else "---",
-                           help=f"最終更新: {{dgs10[0]['date']}}" if dgs10 else "")
-        with c5: st.metric("DXY",      f"{{dxy[0]['value']:.2f}}"   if dxy   else "---",
-                           help=f"最終更新: {{dxy[0]['date']}}" if dxy else "")
-
+        with c1: st.metric("SOFR",     f"{sofr[0]['value']:.2f}%"  if sofr  else "---")
+        with c2: st.metric("IORB",     f"{iorb[0]['value']:.2f}%"  if iorb  else "---")
+        with c3: st.metric("EFFR",     f"{effr[0]['value']:.2f}%"  if effr  else "---")
+        with c4: st.metric("米10年債", f"{dgs10[0]['value']:.2f}%" if dgs10 else "---")
+        with c5: st.metric("DXY",      f"{dxy[0]['value']:.2f}"    if dxy   else "---")
         if sofr and iorb:
             spread_bps = (sofr[0]["value"] - iorb[0]["value"]) * 100
             if spread_bps <= 0:
-                sp_color, sp_label = "#10b981", "🟢 安全 — 流動性良好"
-                sp_text = "SOFRがIORB以下。ドル調達コストが低く流動性ストレスなし。BTC上昇サイン。"
+                sc, sl, st2 = "#10b981", "🟢 安全 — 流動性良好", "SOFRがIORB以下。ドル調達コストが低く流動性ストレスなし。BTC上昇サイン。"
             elif spread_bps <= 5:
-                sp_color, sp_label = "#eab308", "🟡 注意 — やや逼迫"
-                sp_text = "SOFRがIORBをやや上回る。ドル調達コスト上昇の初期段階。軽微な下落圧力の可能性。"
+                sc, sl, st2 = "#eab308", "🟡 注意 — やや逼迫", "SOFRがIORBをやや上回る。ドル調達コスト上昇の初期段階。"
             else:
-                sp_color, sp_label = "#ef4444", "🔴 警戒 — ドル不足"
-                sp_text = "SOFRがIORBを大幅に上回る。ドル流動性逼迫。リスクオフでBTC売り圧力が強まる可能性。"
-            st.markdown(f"""
-            <div style="background:#1e2028;border:1px solid {{sp_color}}55;border-radius:12px;
-                        padding:16px 20px;margin-top:8px;">
-                <div style="display:flex;align-items:center;gap:20px;">
-                    <div style="text-align:center;min-width:110px;">
-                        <div style="font-size:0.75rem;color:#94a3b8;">SOFR−IORB スプレッド</div>
-                        <div style="font-size:2.5rem;font-weight:900;color:{{sp_color}};line-height:1.1;">
-                            {{spread_bps:.1f}}<span style="font-size:1rem;"> bps</span>
-                        </div>
-                    </div>
-                    <div>
-                        <div style="font-size:1rem;font-weight:bold;color:{{sp_color}};">{{sp_label}}</div>
-                        <div style="font-size:0.85rem;color:#94a3b8;margin-top:4px;">{{sp_text}}</div>
-                    </div>
-                </div>
-            </div>
-            """, unsafe_allow_html=True)
-
+                sc, sl, st2 = "#ef4444", "🔴 警戒 — ドル不足", "SOFRがIORBを大幅に上回る。ドル流動性逼迫。BTC売り圧力が強まる可能性。"
+            st.markdown(f'<div style="background:#1e2028;border:1px solid {sc}55;border-radius:12px;padding:16px;margin-top:8px;"><b style="color:{sc};">SOFR−IORB: {spread_bps:.1f} bps</b> &nbsp; {sl}<br><span style="color:#94a3b8;font-size:0.85rem;">{st2}</span></div>', unsafe_allow_html=True)
         if m2 and len(m2) >= 2:
             import plotly.graph_objects as go
             st.markdown("##### 💵 米国M2マネーサプライ")
@@ -267,14 +212,10 @@ def render_btc_dashboard():
                 line=dict(color="#3b82f6", width=2),
                 fillcolor="rgba(59,130,246,0.1)"
             ))
-            fig.update_layout(
-                height=200, margin=dict(l=0, r=0, t=10, b=0),
+            fig.update_layout(height=200, margin=dict(l=0,r=0,t=10,b=0),
                 paper_bgcolor="#1e2028", plot_bgcolor="#1e2028",
                 font=dict(color="#94a3b8"),
-                xaxis=dict(showgrid=False, color="#64748b"),
-                yaxis=dict(showgrid=True, gridcolor="#2d3140",
-                           tickprefix="$", ticksuffix="T", color="#64748b"),
-            )
+                xaxis=dict(showgrid=False), yaxis=dict(tickprefix="$", ticksuffix="T"))
             st.plotly_chart(fig, use_container_width=True)
     else:
-        st.info("💡 **FRED APIキー**を入力するとSOFR・IORB・DXY・M2などのマクロ金利指標が表示されます。\n\n無料取得: https://fred.stlouisfed.org/docs/api/api_key.html")
+        st.info("💡 FRED APIキーを入力するとSOFR・IORB・DXY・M2などのマクロ金利指標が表示されます。\n無料取得: https://fred.stlouisfed.org/docs/api/api_key.html")

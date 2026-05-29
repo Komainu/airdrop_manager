@@ -151,7 +151,7 @@ def send_telegram_project_notification(row):
     return send_telegram_notification(message)
 
 # --- データ保存・読み込み機能 (Google スプレッドシート版) ---
-SHEET_URL = "https://docs.google.com/spreadsheets/d/13-zUqQcSm-3zXHF33p5be940lVWgOVbbj2FoN9aVph8/edit"
+SHEET_URL = "https://docs.google.com/spreadsheets/d/13-zUqQcSm-3zXHF33p5be940lVWgOVbbj2FoN9aVph8/edit?pli=1&gid=0#gid=0"
 
 def get_worksheet():
     scope = ['https://www.googleapis.com/auth/spreadsheets', 'https://www.googleapis.com/auth/drive']

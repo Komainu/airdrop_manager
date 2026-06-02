@@ -162,35 +162,6 @@ def get_worksheet():
     sheet = gc.open_by_url(SHEET_URL)
     return sheet.sheet1
 
-def get_x_news_worksheet():
-    scope = ['https://www.googleapis.com/auth/spreadsheets', 'https://www.googleapis.com/auth/drive']
-    creds_dict = dict(st.secrets["gcp_service_account"])
-    credentials = Credentials.from_service_account_info(creds_dict, scopes=scope)
-    gc = gspread.authorize(credentials)
-    sheet = gc.open_by_url(SHEET_URL)
-    try:
-        return sheet.worksheet("Xニュース")
-    except gspread.exceptions.WorksheetNotFound:
-        return sheet.add_worksheet(title="Xニュース", rows="1000", cols="6")
-
-def load_x_news():
-    try:
-        ws = get_x_news_worksheet()
-        data = ws.get_all_values()
-        if not data:
-            headers = ["日時", "アカウント", "URL", "タイトル", "ランク", "理由"]
-            ws.append_row(headers)
-            return pd.DataFrame(columns=headers)
-        headers = data[0]
-        records = data[1:]
-        if not records:
-            return pd.DataFrame(columns=headers)
-        df = pd.DataFrame(records, columns=headers)
-        df = df.iloc[::-1].reset_index(drop=True)
-        return df
-    except Exception as e:
-        print(f"Xニュース読み込みエラー: {e}")
-        return pd.DataFrame()
 
 def save_tasks(df):
     try:
@@ -769,11 +740,10 @@ with st.expander("📊 プロジェクト一覧 (クリックで詳細へ移動)
 st.divider()
 
 # --- タブエリア ---
-tab1, tab2, tab3, tab4, tab5 = st.tabs([
-    "📅 タスクリスト & 秘書チャット",
-    "📝 新規一括登録",
-    "🐦 AI X ニュース",
-    "📊 Polymarket予測",
+tab1, tab2, tab4, tab5 = st.tabs([
+    "📅",
+    "🆕",
+    "📊 Polymarket",
     "📈 BTCマクロ"
 ])
 
@@ -902,91 +872,6 @@ with tab2:
                 else:
                     st.error("プロジェクト情報を抽出できませんでした。テキストを確認してください。")
 
-@st.cache_data(ttl=86400, show_spinner=False)
-def translate_to_japanese_v2(text):
-    if not text or len(str(text).strip()) == 0:
-        return text
-    if re.search(r'[ぁ-んァ-ン一-龥]', str(text)):
-        return text
-    try:
-        res = requests.get(
-            "https://translate.googleapis.com/translate_a/single",
-            params={"client": "gtx", "sl": "en", "tl": "ja", "dt": "t", "q": text},
-            timeout=5,
-        )
-        return "".join([x[0] for x in res.json()[0]])
-    except Exception as e:
-        return text
-
-with tab3:
-    st.write("### 🐦 AIが厳選したXニュース")
-    st.caption("GASで定期取得し、Geminiが評価した重要ニュースを表示します。")
-    col_a, col_b = st.columns([1, 4])
-    with col_a:
-        if st.button("🔄 更新", key="refresh_x_news", use_container_width=True):
-            st.rerun()
-    x_df = load_x_news()
-    if not x_df.empty:
-        for i, row in x_df.iterrows():
-            date_str = str(row.get("日時", ""))
-            account = str(row.get("アカウント", ""))
-            url = str(row.get("URL", ""))
-            title = str(row.get("タイトル", ""))
-            rank = str(row.get("ランク", ""))
-            reason = str(row.get("理由", ""))
-            title_jp = translate_to_japanese_v2(title)
-            reason_jp = translate_to_japanese_v2(reason)
-            rank_styles = {
-                "S": {"bg": "linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%)", "text_color": "#800000", "badge_bg": "#d32f2f", "badge_text": "#ffffff", "icon": "🔥", "label": "Sランク (超重要)", "shadow": "rgba(255, 107, 129, 0.3)"},
-                "A": {"bg": "linear-gradient(135deg, #f6d365 0%, #fda085 100%)", "text_color": "#5d4037", "badge_bg": "#f57c00", "badge_text": "#ffffff", "icon": "⭐", "label": "Aランク (重要)", "shadow": "rgba(253, 160, 133, 0.3)"},
-                "B": {"bg": "linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%)", "text_color": "#1a237e", "badge_bg": "#1976d2", "badge_text": "#ffffff", "icon": "💠", "label": "Bランク (普通)", "shadow": "rgba(142, 197, 252, 0.3)"},
-                "C": {"bg": "linear-gradient(135deg, #d4fc79 0%, #96e6a1 100%)", "text_color": "#1b5e20", "badge_bg": "#388e3c", "badge_text": "#ffffff", "icon": "✅", "label": "Cランク (参考)", "shadow": "rgba(150, 230, 161, 0.3)"}
-            }
-            style = rank_styles.get(rank, {"bg": "linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%)", "text_color": "#212121", "badge_bg": "#757575", "badge_text": "#ffffff", "icon": "📰", "label": f"{rank}ランク", "shadow": "rgba(0,0,0,0.1)"})
-            with st.container(border=False):
-                html_content = f"""
-                <div style='background: {style["bg"]}; padding: 20px; border-radius: 12px; box-shadow: 0 4px 15px {style["shadow"]}; margin-bottom: 12px; color: {style["text_color"]}; position: relative;'>
-                    <div style='margin-bottom: 12px;'>
-                        <span style='background-color: {style["badge_bg"]}; color: {style["badge_text"]}; padding: 4px 12px; border-radius: 20px; font-weight: bold; font-size: 0.85rem;'>
-                            {style["icon"]} {style["label"]}
-                        </span>
-                    </div>
-                    <div style='font-size: 1.3rem; font-weight: 800; margin-bottom: 16px; line-height: 1.5;'>
-                        {title_jp}
-                    </div>
-                """
-                if reason_jp == "AI判定エラー":
-                    html_content += f"<div style='background:rgba(255,255,255,0.7); padding:12px; border-radius: 8px; font-size:0.9rem; color: #d32f2f; font-weight:bold;'>⚠️ AI判定エラー</div>"
-                elif reason_jp and str(reason_jp).lower() not in ["nan", "none", ""]:
-                    html_content += f"<div style='background:rgba(255,255,255,0.65); padding:12px 16px; border-radius: 8px; font-size:0.95rem; color: #212121; line-height: 1.6; border-left: 4px solid {style['badge_bg']};'>💡 <b>AIの分析:</b><br>{reason_jp}</div>"
-                html_content += f"""
-                    <div style='text-align: right; margin-top: 16px; font-size: 0.7rem; opacity: 0.6; font-weight: bold;'>
-                        🏛️ {account} &nbsp;|&nbsp; 🕒 {date_str}
-                    </div>
-                </div>
-                """
-                st.markdown(html_content, unsafe_allow_html=True)
-                c1, c2, c3 = st.columns([1.5, 2, 2])
-                with c1:
-                    if url and url.startswith("http"):
-                        st.link_button("🔗 記事を読む", url, use_container_width=True)
-                with c2:
-                    if st.button("➕ タスクに追加", key=f"add_x_{i}", use_container_width=True):
-                        task_data = {
-                            "プロジェクト名": f"{account}のニュース",
-                            "期限": "未定",
-                            "タスク内容": f"{title_jp}\n\nAIの理由: {reason_jp}\nURL: {url}",
-                            "チェーン": "未定",
-                            "重要度": rank if rank in ["S", "A", "B", "C"] else "C",
-                            "ソースURL": url
-                        }
-                        current_df = _get_cached_df()
-                        updated_df, _, _ = add_or_update_tasks(current_df, [task_data])
-                        st.session_state.cached_df = updated_df
-                        st.toast("✅ ニュースをタスクに追加しました！", icon="✅")
-                        st.rerun()
-    else:
-        st.info("ニュースはまだありません。GASが実行されるとここに表示されます。")
 
 with tab4:
     polymarket_dashboard.render_polymarket_dashboard()

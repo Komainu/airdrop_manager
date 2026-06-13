@@ -7,6 +7,7 @@ from datetime import datetime, timedelta, timezone
 import os
 import time
 import threading
+import math
 
 # --- スプレッドシート書き込み用ロック (競合防止) ---
 _save_lock = threading.Lock()
@@ -163,6 +164,18 @@ def get_worksheet():
     return sheet.sheet1
 
 
+def _sanitize_df_for_sheets(df):
+    import numpy as np
+    df_clean = df.copy()
+    # Replace any pandas/numpy missing values with empty string
+    df_clean = df_clean.replace([np.nan, np.inf, -np.inf], "")
+    df_clean = df_clean.fillna("")
+    df_clean = df_clean.astype(str)
+    # Double check string representations
+    df_clean = df_clean.replace(["nan", "None", "NaT", "NaN", "null", "<NA>"], "")
+    return df_clean
+
+
 def save_tasks(df):
     try:
         if df.empty:
@@ -171,7 +184,8 @@ def save_tasks(df):
         with _save_lock:
             ws = get_worksheet()
             header = df.columns.values.tolist()
-            rows = df.astype(str).values.tolist()
+            df_clean = _sanitize_df_for_sheets(df)
+            rows = df_clean.values.tolist()
             all_data = [header] + rows
             try:
                 sheet_data = ws.get_all_values()
@@ -221,7 +235,7 @@ def load_tasks():
                     df[col] = "True"
                     need_sheet_update = True
                 else:
-                    df[col] = None
+                    df[col] = ""
         if need_sheet_update:
             print("[load_tasks] 新規カラムを補完しました（次回保存時にシートへ反映されます）")
         df["プロジェクト名"] = df["プロジェクト名"].astype(str).str.strip()
@@ -232,7 +246,7 @@ def load_tasks():
         fill_defaults = {
             "チェーン": "未定", "タスク内容": "", "重要度": "C", "ステータス": "未完了",
             "ピン留め": False, "登録日時": "2000-01-01T00:00:00", "資金調達額": "不明",
-            "VC": "不明", "通知設定": False, "Telegram通知済み": "True"
+            "VC": "不明", "通知設定": False, "Telegram通知済み": "True", "ソースURL": ""
         }
         df = df.fillna(fill_defaults)
         df["ピン留め"] = df["ピン留め"].map(lambda x: str(x).lower() == 'true' if not isinstance(x, bool) else x)
@@ -363,7 +377,7 @@ def parse_memo_locally(memo):
         lines = para.strip().split('\n')
         first_line = lines[0].strip()
         url_match = re.search(r'https?://[^\s]+', para)
-        source_url = url_match.group(0) if url_match else None
+        source_url = url_match.group(0) if url_match else ""
         project_name = first_line
         name_match = re.search(r'([A-Za-z0-9_]+)', first_line)
         if name_match:
@@ -464,6 +478,7 @@ def add_or_update_tasks(existing_df, new_tasks, notify=True):
                 send_telegram_project_notification(task)
             task["Telegram通知済み"] = "True"
             existing_df = pd.concat([existing_df, pd.DataFrame([task])], ignore_index=True)
+            existing_df = existing_df.fillna("")
             created_count += 1
     save_tasks(existing_df)
     return existing_df, created_count, updated_count
@@ -671,6 +686,11 @@ with st.sidebar:
     st.header("⚙️ 管理設定")
     if "save_error" in st.session_state and st.session_state["save_error"]:
         st.error(f"スプレッドシート保存エラー: {st.session_state['save_error']}")
+        
+    if st.button("🔄 最新データをシートから再読込"):
+        st.session_state.cached_df = None
+        st.cache_data.clear()
+        st.rerun()
     if st.button("🔄 重複プロジェクトをクリーンアップ"):
         df = load_tasks()
         if not df.empty:

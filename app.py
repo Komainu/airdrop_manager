@@ -252,12 +252,7 @@ def load_tasks():
         df["ピン留め"] = df["ピン留め"].map(lambda x: str(x).lower() == 'true' if not isinstance(x, bool) else x)
         df["通知設定"] = df["通知設定"].map(lambda x: str(x).lower() == 'true' if not isinstance(x, bool) else x)
         df["登録日時"] = df["登録日時"].astype(str)
-        pin_notify_mismatch = (df["ピン留め"] == True) & (df["通知設定"] == False) & (df["ステータス"] != "完了")
-        if pin_notify_mismatch.any():
-            mismatched_names = df.loc[pin_notify_mismatch, "プロジェクト名"].tolist()
-            df.loc[pin_notify_mismatch, "通知設定"] = True
-            print(f"[通知同期] ピン留め済みプロジェクトの通知設定をONに修正: {mismatched_names}")
-            save_tasks(df)
+        # 通知設定の強制同期（ピン留め＝通知ON）機能を無効化
         return df
     except Exception as e:
         st.error(f"スプレッドシート読み込みエラー: {e}")
@@ -311,8 +306,6 @@ def on_toggle_pin(row_index):
         p_name = df.at[row_index, "プロジェクト名"]
         current_val = bool(df.at[row_index, "ピン留め"])
         df.at[row_index, "ピン留め"] = not current_val
-        if not current_val:
-            df.at[row_index, "通知設定"] = True
         update_cached_and_save(df)
     else:
         print(f"❌ [Error] Row index {row_index} not found in dataframe!")
